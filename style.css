@@ -1,0 +1,191 @@
+:root {
+
+    /* ===== CORES PRINCIPAIS ===== */
+
+    --primary-blue: #2563FF;
+    --primary-blue-hover: #3B82F6;
+
+    --primary-purple: #6D28FF;
+    --primary-purple-hover: #7C3AED;
+
+    /* ===== GRADIENTE DA MARCA ===== */
+
+    --gradient-primary: linear-gradient(
+        90deg,
+        #2563FF 0%,
+        #4F46E5 50%,
+        #6D28FF 100%
+    );
+
+    /* ===== CORES DE FUNDO ===== */
+
+    --background: #050816;
+    --background-secondary: #0A0F1F;
+    --background-card: #101828;
+    --background-hover: #172033;
+
+    /* ===== BORDAS ===== */
+
+    --border-color: rgba(255,255,255,0.08);
+    --border-hover: rgba(109,40,255,0.4);
+
+    /* ===== TEXTOS ===== */
+    --border-color:#FFFFFF;
+    --text-primary: #FFFFFF;
+    --text-secondary: #C7D2FE;
+    --text-muted: #94A3B8;
+
+    /* ===== DESTAQUES ===== */
+
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+
+    /* ===== SOMBRAS ===== */
+
+    --shadow-blue: 0 0 25px rgba(37,99,255,0.35);
+    --shadow-purple: 0 0 25px rgba(109,40,255,0.35);
+
+    /* ===== GLASS EFFECT ===== */
+
+    --glass-bg: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #050816;
+    
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: url('./assets/ChatGPT Image 7 de jun. de 2026, 19_47_14.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* Ajuste fino */
+    transform: translateX(90px);
+     
+
+    z-index: -1;
+}
+header {
+    background: var(--background-secondary);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: solid 1px var(--border-color);
+    
+}
+header nav a {
+    color: var(--text-primary);
+    text-decoration: none;
+    margin-left: 40px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    
+}
+
+header button {
+    background: var(--primary-blue);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+header img {
+    height: 60px;
+}
+
+
+
+.hero{
+    width: 100%;
+    height: auto;
+    display: flex;
+
+}
+
+.container-left {
+    width: 50%;
+    padding: 50px;
+    margin-top: 100px;
+    margin-left:50px ;
+    
+}
+
+.container-left h1{
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+}
+
+.container-left h1 span{
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container-left p{
+    color: var(--text-secondary);
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.container-left button{
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.container-left .btn-primary{
+    background: var(--primary-blue);
+}
+
+.container-left .btn-secondary{
+    background: var(--background-secondary);
+    margin-left: 20px;
+    border: solid 1px var(--primary-blue);
+}
+
+.container-left .btn-primary:hover{
+    background: var(--primary-blue-hover);
+}
+
+.container-left .btn-secondary:hover{
+    background: var(--primary-blue);
+    color: #fff;
+}
+
+.container-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-right img{
+    width: 80%;
+}
