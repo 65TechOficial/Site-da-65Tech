@@ -72,9 +72,16 @@ body::before{
     background: url('./assets/ChatGPT Image 7 de jun. de 2026, 19_47_14.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center right;
 
     /* Ajuste fino */
-    transform: translateX(90px);
+    transform: translate(110px, -10px) scale(0.94);
+    transform-origin: center right;
+    filter: saturate(0.92) brightness(0.8);
+    opacity: 0.95;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 76%, rgba(0, 0, 0, 0.45) 92%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 76%, rgba(0, 0, 0, 0.45) 92%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
      
 
     z-index: -1;
@@ -175,15 +182,16 @@ header.scrolled:hover button {
     display: flex;
     position: relative;
     z-index: 1;
-    padding-bottom: 48px;
+    padding-bottom: 68px;
 
 }
 
 .container-left {
     width: 50%;
-    padding: 50px;
-    margin-top: 100px;
+    padding: 58px 50px 50px;
+    margin-top: 88px;
     margin-left:50px ;
+    max-width: 760px;
     
 }
 
@@ -202,10 +210,12 @@ header.scrolled:hover button {
 }
 
 .container-left p{
-    color: var(--text-secondary);
+    color: #dde6ff;
     font-size: 18px;
-    margin-bottom: 20px;
+    line-height: 1.7;
+    margin-bottom: 26px;
     font-family: 'Inter', sans-serif;
+    max-width: 680px;
 }
 
 .container-left button{
@@ -224,7 +234,7 @@ header.scrolled:hover button {
 
 .container-left .btn-secondary{
     background: var(--background-secondary);
-    margin-left: 20px;
+    margin-left: 16px;
     border: solid 1px var(--primary-blue);
 }
 
@@ -238,16 +248,16 @@ header.scrolled:hover button {
 }
 
 .benefits-strip {
-    margin-top: 30px;
+    margin-top: 40px;
     width: 100%;
     max-width: 760px;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 8px;
-    background: transparent;
+    gap: 10px;
+    padding: 18px 20px;
+    border: 1px solid rgba(132, 146, 255, 0.12);
+    border-radius: 14px;
+    background: rgba(9, 13, 28, 0.38);
     
     backdrop-filter: blur(1px);
 }
@@ -256,11 +266,11 @@ header.scrolled:hover button {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 2px 16px;
+    padding: 8px 14px;
 }
 
 .benefit-item:not(:last-child) {
-    border-right: 1px solid rgba(255, 255, 255, 0.09);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .benefit-icon {
@@ -317,7 +327,7 @@ header.scrolled:hover button {
     height: auto;
     position: relative;
     z-index: 2;
-    margin-top: 18px;
+    margin-top: 0;
     padding: 30px;
     display: grid;
     grid-template-columns: 1.05fr 1fr;
@@ -372,10 +382,28 @@ header.scrolled:hover button {
 }
 
 .service-icon {
-    color: #7d5cff;
-    font-size: 24px;
-    margin-bottom: 10px;
+    color: #8ea3ff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
     line-height: 1;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(61, 91, 255, 0.18), rgba(109, 40, 255, 0.12));
+    border: 1px solid rgba(125, 92, 255, 0.34);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 10px 24px rgba(17, 24, 51, 0.22);
+}
+
+.service-icon svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .service-card h3 {
@@ -402,6 +430,7 @@ header.scrolled:hover button {
 
 .project-preview {
     height: 245px;
+    width: 100%;
     border-radius: 10px;
     border: 1px solid rgba(120, 88, 255, 0.32);
     background: radial-gradient(circle at 20% 20%, rgba(121, 62, 255, 0.2), rgba(24, 16, 40, 0.88) 60%), linear-gradient(120deg, rgba(48, 26, 95, 0.84), rgba(15, 18, 40, 0.94));
@@ -412,6 +441,14 @@ header.scrolled:hover button {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     letter-spacing: 0.4px;
+    overflow: hidden;
+}
+
+.project-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .project-content {
@@ -464,20 +501,34 @@ header.scrolled:hover button {
 }
 
 .project-next {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    border: 1px solid rgba(124, 106, 255, 0.58);
-    background: rgba(79, 57, 178, 0.23);
+    border: 1px solid rgba(132, 146, 255, 0.45);
+    background: linear-gradient(135deg, #3b82f6 0%, #5e66ff 100%);
     color: #f3f4ff;
     cursor: pointer;
-    font-size: 19px;
-    transition: transform 0.25s ease, background 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 22px rgba(40, 82, 235, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.project-next svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .project-next:hover {
-    transform: translateX(2px);
-    background: rgba(91, 64, 201, 0.4);
+    transform: translateX(2px) scale(1.03);
+    box-shadow: 0 10px 26px rgba(40, 82, 235, 0.46);
+    filter: brightness(1.06);
 }
 
 .project-dots {
@@ -497,6 +548,319 @@ header.scrolled:hover button {
 .project-dots span.active {
     width: 24px;
     background: #5e66ff;
+}
+
+.clinical-section {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    padding: 24px 30px 42px;
+    margin-top: 0;
+    background: linear-gradient(180deg, rgba(4, 10, 27, 0.88) 0%, rgba(6, 12, 29, 0.96) 100%);
+}
+
+.clinical-process,
+.clinical-testimonials {
+    max-width: 100%;
+}
+
+.clinical-process h2,
+.clinical-testimonials h2 {
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    line-height: 1.06;
+    margin-bottom: 22px;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.process-step {
+    padding: 20px 18px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(112, 134, 255, 0.14);
+    background: rgba(13, 20, 46, 0.68);
+    min-height: 208px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.process-step:hover {
+    transform: translateY(-3px);
+    border-color: rgba(112, 134, 255, 0.42);
+}
+
+.process-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7fa2ff;
+    background: linear-gradient(135deg, rgba(37, 99, 255, 0.16), rgba(109, 40, 255, 0.1));
+    border: 1px solid rgba(121, 160, 255, 0.3);
+    box-shadow: inset 0 0 0 1px rgba(109, 40, 255, 0.05), 0 10px 22px rgba(16, 22, 47, 0.2);
+}
+
+.process-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.95;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.process-step h3 {
+    color: #f6f8ff;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.process-step p {
+    color: #b8c4e8;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.clinical-testimonials {
+    margin-top: 36px;
+}
+
+.testimonial-carousel {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    align-items: center;
+}
+
+.testimonial-card {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 22px;
+    align-items: center;
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(112, 134, 255, 0.16);
+    background: linear-gradient(135deg, rgba(12, 18, 39, 0.96) 0%, rgba(10, 16, 35, 0.86) 100%);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
+}
+
+.testimonial-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(122, 144, 255, 0.42);
+    box-shadow: 0 0 0 8px rgba(37, 99, 255, 0.08);
+}
+
+.testimonial-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.testimonial-content h3 {
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 23px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.testimonial-specialty {
+    color: #6f78ff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+.testimonial-content p {
+    color: #ced7f7;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.testimonial-prev {
+    transform: rotate(180deg);
+}
+
+.testimonial-prev:hover {
+    transform: rotate(180deg) translateX(2px) scale(1.03);
+}
+
+.testimonial-next:hover {
+    transform: translateX(2px) scale(1.03);
+}
+
+.workflow-section {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    padding: 24px 30px 34px;
+    margin-top: 0;
+    background: linear-gradient(180deg, rgba(3, 9, 25, 0.94) 0%, rgba(4, 10, 27, 0.98) 100%);
+}
+
+.workflow-section h2 {
+    color: #f4f7ff;
+    font-family: 'Inter', sans-serif;
+    font-size: 42px;
+    line-height: 1.04;
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.workflow-section h2 span {
+    color: #6f78ff;
+}
+
+.workflow-track {
+    --workflow-progress: 0%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+    padding-top: 12px;
+}
+
+.workflow-line {
+    position: absolute;
+    top: 36px;
+    left: calc(100% / 12);
+    right: calc(100% / 12);
+    height: 2px;
+    background: rgba(127, 145, 255, 0.24);
+    z-index: 0;
+    opacity: 0;
+    transform: scaleX(0.7);
+    transform-origin: left center;
+    transition: opacity 0.45s ease, transform 0.55s ease;
+}
+
+.workflow-progress {
+    display: block;
+    height: 100%;
+    width: var(--workflow-progress);
+    background: linear-gradient(90deg, #3b82f6 0%, #6d28ff 100%);
+    box-shadow: 0 0 14px rgba(78, 96, 255, 0.55);
+    transition: width 0.28s ease;
+}
+
+.workflow-step {
+    position: relative;
+    z-index: 1;
+    border: 0;
+    background: transparent;
+    text-align: center;
+    padding: 0 8px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.workflow-section.is-visible .workflow-line {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.workflow-section.is-visible .workflow-step {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc((var(--stagger, 0) * 90ms) + 120ms);
+}
+
+.workflow-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 10px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(111, 120, 255, 0.45);
+    color: #89a3ff;
+    background: rgba(13, 20, 46, 0.82);
+    transition: transform 0.22s ease, border-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.workflow-step.active .workflow-icon {
+    border-color: rgba(111, 120, 255, 0.9);
+    color: #eef2ff;
+    box-shadow: 0 0 0 4px rgba(79, 98, 228, 0.2), 0 0 18px rgba(79, 98, 228, 0.45);
+}
+
+.workflow-step:hover .workflow-icon {
+    transform: translateY(-2px);
+}
+
+.workflow-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.workflow-number {
+    display: block;
+    color: #5f6cff;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.8px;
+}
+
+.workflow-step h3 {
+    color: #f3f6ff;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.workflow-step p {
+    color: #b4c0e6;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.services-portfolio + .clinical-section,
+.clinical-section + .workflow-section {
+    border-top: 1px solid rgba(117, 136, 255, 0.2);
+    box-shadow: inset 0 1px 0 rgba(82, 98, 189, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .workflow-line,
+    .workflow-step,
+    .workflow-progress {
+        transition: none;
+    }
+
+    .workflow-line,
+    .workflow-step {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -556,6 +920,33 @@ header.scrolled:hover button {
     .services-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .testimonial-card {
+        grid-template-columns: 132px 1fr;
+    }
+
+    .testimonial-photo {
+        width: 132px;
+        height: 132px;
+    }
+
+    .workflow-track {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 18px;
+    }
+
+    .workflow-line {
+        display: none;
+    }
+
+    .workflow-section h2 {
+        font-size: 34px;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -576,4 +967,52 @@ header.scrolled:hover button {
     .project-preview {
         height: 190px;
     }
+
+    .clinical-section {
+        width: calc(100% - 28px);
+        padding: 20px 16px 34px;
+    }
+
+    .clinical-process h2,
+    .clinical-testimonials h2 {
+        font-size: 32px;
+    }
+
+    .process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonial-carousel {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonial-prev,
+    .testimonial-next {
+        justify-self: center;
+    }
+
+    .testimonial-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+    }
+
+    .testimonial-photo {
+        width: 128px;
+        height: 128px;
+    }
+
+    .workflow-section {
+        width: calc(100% - 28px);
+        padding: 20px 16px 30px;
+    }
+
+    .workflow-track {
+        grid-template-columns: 1fr;
+    }
+
+    .workflow-section h2 {
+        font-size: 32px;
+    }
+
 }

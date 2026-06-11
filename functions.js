@@ -1,24 +1,27 @@
 const projects = [
 	{
-		title: "Projeto em destaque",
-		category: "Site Institucional",
-		description: "Campo pronto para receber a imagem e a descrição dos seus projetos quando você enviar.",
-		preview: "Prévia do Projeto",
-		link: "#"
+		title: "Injet Nobre",
+		category: "Site institucional para clinica especializada",
+		description: "Apresentacao digital voltada para clinicas e consultorios, com foco em autoridade medica, clareza de servicos e contato rapido para novos pacientes.",
+		image: "./assets/Mockups Injet Nobre.png",
+		imageAlt: "Preview do projeto Injet Nobre",
+		link: "https://gabriel100-pro.github.io/Site-oficial-InjetNobre/"
 	},
 	{
-		title: "Projeto 2",
-		category: "Landing Page",
-		description: "Estrutura preparada para mostrar resultados, objetivo do projeto e principais diferenciais.",
-		preview: "Prévia do Projeto 2",
-		link: "#"
+		title: "Controle de Estoque",
+		category: "Sistema interno para clinicas e farmacias",
+		description: "Fluxo de gestao de insumos medicos e medicamentos com visao clara de entradas, saidas e itens criticos para apoiar operacao segura no dia a dia.",
+		image: "./assets/Mockup Controle de Estoque.png",
+		imageAlt: "Preview do projeto Controle de Estoque",
+		link: "https://gabriel100-pro.github.io/Controle-de-estoque/"
 	},
 	{
-		title: "Projeto 3",
-		category: "Loja Virtual",
-		description: "Espaço reservado para exibir sua próxima vitrine com foco em conversão e experiência.",
-		preview: "Prévia do Projeto 3",
-		link: "#"
+		title: "Agendamento",
+		category: "Agenda online para profissionais de saude",
+		description: "Experiencia de marcacao de consultas com foco em praticidade para pacientes e melhor organizacao de horarios para equipes de atendimento.",
+		image: "./assets/Mosckup Agendamento.png",
+		imageAlt: "Preview do projeto Agendamento",
+		link: "https://gabriel100-pro.github.io/Projeto-de-Agendamento/"
 	}
 ];
 
@@ -38,8 +41,10 @@ function renderProject(index) {
 	titleEl.textContent = project.title;
 	categoryEl.textContent = project.category;
 	descriptionEl.textContent = project.description;
-	previewEl.textContent = project.preview;
+	previewEl.innerHTML = `<img src="${project.image}" alt="${project.imageAlt}">`;
 	linkEl.setAttribute("href", project.link);
+	linkEl.setAttribute("target", "_blank");
+	linkEl.setAttribute("rel", "noopener noreferrer");
 
 	const dots = dotsContainer.querySelectorAll("span");
 	dots.forEach((dot, dotIndex) => {
@@ -68,3 +73,184 @@ function handleHeaderScroll() {
 
 window.addEventListener("scroll", handleHeaderScroll, { passive: true });
 handleHeaderScroll();
+
+const testimonials = [
+	{
+		name: "Dra. Mariana Silva",
+		specialty: "Dermatologista",
+		quote: "O sistema da 65Tech triplicou nossos agendamentos online e deixou o atendimento muito mais fluido.",
+		image: "./assets/Dra Adriana Guedes.jpg",
+		imageAlt: "Dra. Mariana Silva, dermatologista"
+	},
+	{
+		name: "Dr. Renato Alves",
+		specialty: "Cardiologista",
+		quote: "Conseguimos organizar consultas e retornos com mais rapidez e reduzir as faltas em agenda.",
+		image: "./assets/Dra Adriano Moraes.jpg",
+		imageAlt: "Dr. Renato Alves, cardiologista"
+	},
+	{
+		name: "Dra. Fernanda Costa",
+		specialty: "Pediatra",
+		quote: "A experiência digital ficou mais profissional e nossos pacientes passaram a confiar mais no processo de agendamento.",
+		image: "./assets/Dra Fernanda Lopes.jpg",
+		imageAlt: "Dra. Fernanda Costa, pediatra"
+	}
+];
+
+let currentTestimonial = 0;
+
+const testimonialImageEl = document.getElementById("testimonialImage");
+const testimonialNameEl = document.getElementById("testimonialName");
+const testimonialSpecialtyEl = document.getElementById("testimonialSpecialty");
+const testimonialQuoteEl = document.getElementById("testimonialQuote");
+const testimonialPrevButton = document.getElementById("testimonialPrev");
+const testimonialNextButton = document.getElementById("testimonialNext");
+const testimonialDotsContainer = document.getElementById("testimonialDots");
+
+function renderTestimonial(index) {
+	const testimonial = testimonials[index];
+
+	testimonialImageEl.setAttribute("src", testimonial.image);
+	testimonialImageEl.setAttribute("alt", testimonial.imageAlt);
+	testimonialNameEl.textContent = testimonial.name;
+	testimonialSpecialtyEl.textContent = testimonial.specialty;
+	testimonialQuoteEl.textContent = testimonial.quote;
+
+	const dots = testimonialDotsContainer.querySelectorAll("span");
+	dots.forEach((dot, dotIndex) => {
+		dot.classList.toggle("active", dotIndex === index);
+	});
+}
+
+if (testimonialPrevButton && testimonialNextButton) {
+	testimonialPrevButton.addEventListener("click", () => {
+		currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+		renderTestimonial(currentTestimonial);
+	});
+
+	testimonialNextButton.addEventListener("click", () => {
+		currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+		renderTestimonial(currentTestimonial);
+	});
+
+	renderTestimonial(currentTestimonial);
+}
+
+const workflowTrack = document.getElementById("workflowTrack");
+const workflowSteps = document.querySelectorAll(".workflow-step");
+const workflowSection = document.querySelector(".workflow-section");
+
+function setWorkflowStep(activeIndex) {
+	if (!workflowTrack || workflowSteps.length === 0) {
+		return;
+	}
+
+	workflowSteps.forEach((step, index) => {
+		step.classList.toggle("active", index <= activeIndex);
+	});
+
+	const maxIndex = workflowSteps.length - 1;
+	const progressPercent = maxIndex > 0 ? (activeIndex / maxIndex) * 100 : 0;
+	workflowTrack.style.setProperty("--workflow-progress", `${progressPercent}%`);
+}
+
+if (workflowSteps.length > 0) {
+	workflowSteps.forEach((step, index) => {
+		step.style.setProperty("--stagger", `${index}`);
+	});
+
+	workflowSteps.forEach((step, index) => {
+		step.addEventListener("click", () => setWorkflowStep(index));
+	});
+
+	setWorkflowStep(0);
+}
+
+if (workflowSection) {
+	const revealWorkflow = () => workflowSection.classList.add("is-visible");
+
+	if ("IntersectionObserver" in window) {
+		const workflowObserver = new IntersectionObserver((entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					revealWorkflow();
+					observer.disconnect();
+				}
+			});
+		}, { threshold: 0.28 });
+
+		workflowObserver.observe(workflowSection);
+	} else {
+		revealWorkflow();
+	}
+}
+
+const serviceIcons = {
+	institucional: `
+		<svg viewBox="0 0 24 24" role="img" aria-label="Sites Institucionais">
+			<path d="M4 20h16" />
+			<path d="M6 20V9l6-4 6 4v11" />
+			<path d="M10 20v-5h4v5" />
+			<path d="M9 11h.01" />
+			<path d="M15 11h.01" />
+		</svg>
+	`,
+	landing: `
+		<svg viewBox="0 0 24 24" role="img" aria-label="Landing Pages">
+			<path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+			<path d="M8 9h8" />
+			<path d="M8 12h6" />
+			<path d="M9 16h2" />
+		</svg>
+	`,
+	loja: `
+		<svg viewBox="0 0 24 24" role="img" aria-label="Lojas Virtuais">
+			<path d="M7 7V6a5 5 0 0 1 10 0v1" />
+			<path d="M6 8h12l1 12H5L6 8z" />
+			<path d="M9 11h.01" />
+			<path d="M15 11h.01" />
+			<path d="M9 15h6" />
+		</svg>
+	`,
+	mobile: `
+		<svg viewBox="0 0 24 24" role="img" aria-label="Otimização Mobile">
+			<path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+			<path d="M9 6h6" />
+			<path d="M10 18h4" />
+			<path d="M10 14h4" />
+		</svg>
+	`,
+	seo: `
+		<svg viewBox="0 0 24 24" role="img" aria-label="SEO Básico">
+			<path d="M4 19h16" />
+			<path d="M7 15 11 11l3 3 4-5" />
+			<path d="M17 8h2v2" />
+			<path d="M6 14 7 15" />
+		</svg>
+	`,
+	manutencao: `
+		<svg viewBox="0 0 24 24" role="img" aria-label="Manutenção">
+			<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-3 3-2-2 3-3z" />
+			<path d="M15.2 10.8 13.5 9.1" />
+		</svg>
+	`
+};
+
+function applyServiceIcons() {
+	const cards = document.querySelectorAll("[data-service-card]");
+
+	cards.forEach((card) => {
+		const serviceName = card.getAttribute("data-service-card");
+		const iconWrapper = card.querySelector(".service-icon");
+		const iconMarkup = serviceIcons[serviceName];
+
+		if (!iconWrapper || !iconMarkup) {
+			return;
+		}
+
+		iconWrapper.innerHTML = iconMarkup.trim();
+	});
+}
+
+applyServiceIcons();
