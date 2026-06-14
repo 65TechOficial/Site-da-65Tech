@@ -254,3 +254,59 @@ function applyServiceIcons() {
 }
 
 applyServiceIcons();
+
+const contactForm = document.getElementById("contactForm");
+const contactFeedback = document.getElementById("contactFeedback");
+const sendMessageButton = document.getElementById("sendMessageButton");
+
+async function handleContactSubmit(event) {
+	event.preventDefault();
+
+	if (!contactForm || !contactFeedback || !sendMessageButton) {
+		return;
+	}
+
+	const formData = new FormData(contactForm);
+	const payload = {
+		nome: (formData.get("nome") || "").toString().trim(),
+		empresa: (formData.get("empresa") || "").toString().trim(),
+		whatsapp: (formData.get("whatsapp") || "").toString().trim(),
+		email: (formData.get("email") || "").toString().trim(),
+		tipoProjeto: (formData.get("tipoProjeto") || "").toString().trim(),
+		mensagem: (formData.get("mensagem") || "").toString().trim()
+	};
+
+	contactFeedback.textContent = "";
+	contactFeedback.className = "contact-feedback";
+	sendMessageButton.disabled = true;
+	sendMessageButton.textContent = "Enviando...";
+
+	try {
+		const response = await fetch("http://localhost:3000/contatos", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(payload)
+		});
+
+		if (!response.ok) {
+			const errorBody = await response.json().catch(() => ({}));
+			throw new Error(errorBody.erro || "Nao foi possivel enviar sua mensagem.");
+		}
+
+		contactFeedback.textContent = "mensagem recebida, retornaremos em breve";
+		contactFeedback.classList.add("success");
+		contactForm.reset();
+	} catch (error) {
+		contactFeedback.textContent = error.message || "Erro ao enviar mensagem.";
+		contactFeedback.classList.add("error");
+	} finally {
+		sendMessageButton.disabled = false;
+		sendMessageButton.textContent = "Enviar Mensagem";
+	}
+}
+
+if (contactForm) {
+	contactForm.addEventListener("submit", handleContactSubmit);
+}

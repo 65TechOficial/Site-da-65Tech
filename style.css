@@ -849,6 +849,155 @@ header.scrolled:hover button {
     box-shadow: inset 0 1px 0 rgba(82, 98, 189, 0.22);
 }
 
+.workflow-section + .contact-section {
+    border-top: 1px solid rgba(117, 136, 255, 0.2);
+    box-shadow: inset 0 1px 0 rgba(82, 98, 189, 0.22);
+}
+
+.contact-section {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    padding: 36px 30px 44px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 28px;
+    background: linear-gradient(110deg, rgba(3, 11, 30, 0.95) 0%, rgba(5, 10, 25, 0.98) 100%);
+}
+
+.contact-copy h2 {
+    color: #f7f9ff;
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    line-height: 1.08;
+    margin-bottom: 16px;
+}
+
+.contact-copy p {
+    color: #c9d5f6;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+    max-width: 520px;
+}
+
+.contact-copy ul {
+    list-style: none;
+}
+
+.contact-copy li {
+    color: #dbe3ff;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 28px;
+}
+
+.contact-copy li::before {
+    content: "✓";
+    color: #7ea0ff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+}
+
+.contact-form {
+    border: 1px solid rgba(122, 144, 255, 0.24);
+    border-radius: 14px;
+    padding: 18px;
+    background: rgba(7, 14, 34, 0.88);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    border: 1px solid rgba(132, 146, 255, 0.28);
+    border-radius: 10px;
+    background: rgba(12, 18, 42, 0.92);
+    color: #f0f4ff;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.contact-form select,
+.contact-form textarea {
+    margin-bottom: 12px;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder,
+.contact-form select {
+    color: #a6b3da;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    border-color: rgba(100, 126, 255, 0.85);
+    box-shadow: 0 0 0 3px rgba(100, 126, 255, 0.18);
+}
+
+.contact-form button {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: linear-gradient(90deg, #3f63ff 0%, #585dff 55%, #6d4dff 100%);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.22s ease, transform 0.22s ease;
+}
+
+.contact-form button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+.contact-form button:disabled {
+    opacity: 0.75;
+    cursor: wait;
+}
+
+.contact-feedback {
+    min-height: 24px;
+    margin-top: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.contact-feedback.success {
+    color: #22C55E;
+}
+
+.contact-feedback.error {
+    color: #EF4444;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .workflow-line,
     .workflow-step,
@@ -947,6 +1096,20 @@ header.scrolled:hover button {
         font-size: 34px;
     }
 
+    .contact-section {
+        width: calc(100% - 56px);
+        grid-template-columns: 1fr;
+    }
+
+    .contact-copy h2 {
+        font-size: 40px;
+    }
+
+    .contact-copy p,
+    .contact-copy li {
+        font-size: 17px;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -1005,6 +1168,28 @@ header.scrolled:hover button {
     .workflow-section {
         width: calc(100% - 28px);
         padding: 20px 16px 30px;
+    }
+
+    .contact-section {
+        width: calc(100% - 28px);
+        padding: 24px 16px 30px;
+    }
+
+    .contact-copy h2 {
+        font-size: 32px;
+    }
+
+    .contact-copy p,
+    .contact-copy li {
+        font-size: 15px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form button {
+        font-size: 20px;
     }
 
     .workflow-track {

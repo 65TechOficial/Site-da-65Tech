@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Contatos | 65Tech</title>
+    <link rel="stylesheet" href="acesso-65t-9f3k.css">
+</head>
+
+<body>
+    <main class="admin-shell">
+        <header class="admin-header">
+            <div>
+                <p class="label">Area interna</p>
+                <h1>Contatos recebidos</h1>
+                <p class="subtitle">Visualize os leads do formulario e remova registros quando necessario.</p>
+            </div>
+            <a class="back-link" href="index.html">Voltar para o site</a>
+        </header>
+
+        <section class="controls">
+            <label for="apiBase">API Base URL</label>
+            <input id="apiBase" type="text" placeholder="http://localhost:3000">
+            <button id="saveApiBase" type="button">Salvar URL</button>
+            <button id="refreshContacts" type="button">Atualizar lista</button>
+        </section>
+
+        <section class="auth-controls">
+            <label for="adminPassword">Senha de acesso</label>
+            <input id="adminPassword" type="password" placeholder="Digite sua senha admin">
+            <button id="saveAdminPassword" type="button">Salvar senha</button>
+            <button id="clearAdminPassword" type="button">Limpar</button>
+        </section>
+
+        <p id="statusMessage" class="status" aria-live="polite"></p>
+
+        <section class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Empresa</th>
+                        <th>WhatsApp</th>
+                        <th>E-mail</th>
+                        <th>Tipo</th>
+                        <th>Mensagem</th>
+                        <th>Data</th>
+                        <th>Acao</th>
+                    </tr>
+                </thead>
+                <tbody id="contactsTableBody"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="acesso-65t-9f3k.js"></script>
+</body>
+
+</html>

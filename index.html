@@ -336,6 +336,41 @@
         </div>
     </section>
 
+    <section class="contact-section" id="contato">
+        <div class="contact-copy">
+            <h2>Pronto para transformar<br>seu negócio?</h2>
+            <p>Solicite um orçamento sem compromisso e vamos conversar sobre o seu projeto.</p>
+            <ul>
+                <li>Resposta rápida</li>
+                <li>Orçamento gratuito</li>
+                <li>Soluções personalizadas</li>
+            </ul>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+            <div class="contact-grid">
+                <input type="text" id="nome" name="nome" placeholder="Nome" required>
+                <input type="text" id="empresa" name="empresa" placeholder="Empresa">
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="WhatsApp" required>
+                <input type="email" id="email" name="email" placeholder="E-mail" required>
+            </div>
+
+            <select id="tipoProjeto" name="tipoProjeto" required>
+                <option value="" disabled selected>Tipo de Projeto</option>
+                <option value="Site Institucional">Site Institucional</option>
+                <option value="Landing Page">Landing Page</option>
+                <option value="Sistema Web">Sistema Web</option>
+                <option value="E-commerce">E-commerce</option>
+                <option value="Outro">Outro</option>
+            </select>
+
+            <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre o seu projeto..." rows="4" required></textarea>
+
+            <button type="submit" id="sendMessageButton">Enviar Mensagem</button>
+            <p class="contact-feedback" id="contactFeedback" aria-live="polite"></p>
+        </form>
+    </section>
+
     <script src="functions.js"></script>
 
 
