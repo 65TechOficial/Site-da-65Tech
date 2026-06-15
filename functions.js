@@ -62,6 +62,8 @@ if (nextButton) {
 }
 
 const header = document.querySelector("header");
+const menuToggle = document.getElementById("menuToggle");
+const siteNav = document.getElementById("siteNav");
 
 function handleHeaderScroll() {
 	if (!header) {
@@ -73,6 +75,48 @@ function handleHeaderScroll() {
 
 window.addEventListener("scroll", handleHeaderScroll, { passive: true });
 handleHeaderScroll();
+
+function closeMobileMenu() {
+	if (!header || !menuToggle) {
+		return;
+	}
+
+	header.classList.remove("menu-open");
+	menuToggle.setAttribute("aria-expanded", "false");
+	menuToggle.setAttribute("aria-label", "Abrir menu");
+}
+
+if (menuToggle && header && siteNav) {
+	menuToggle.addEventListener("click", () => {
+		const isOpen = header.classList.toggle("menu-open");
+		menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+		menuToggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+	});
+
+	siteNav.querySelectorAll("a").forEach((link) => {
+		link.addEventListener("click", () => {
+			if (window.innerWidth <= 768) {
+				closeMobileMenu();
+			}
+		});
+	});
+
+	document.addEventListener("click", (event) => {
+		if (window.innerWidth > 768) {
+			return;
+		}
+
+		if (!header.contains(event.target)) {
+			closeMobileMenu();
+		}
+	});
+
+	window.addEventListener("resize", () => {
+		if (window.innerWidth > 768) {
+			closeMobileMenu();
+		}
+	});
+}
 
 const testimonials = [
 	{
@@ -258,6 +302,30 @@ applyServiceIcons();
 const contactForm = document.getElementById("contactForm");
 const contactFeedback = document.getElementById("contactFeedback");
 const sendMessageButton = document.getElementById("sendMessageButton");
+const budgetButton = document.getElementById("budgetButton");
+
+function getContactsApiBase() {
+	const savedApiBase = localStorage.getItem("contactsApiBase");
+
+	if (savedApiBase && savedApiBase.trim()) {
+		return savedApiBase.trim().replace(/\/$/, "");
+	}
+
+	return "http://localhost:3000";
+}
+
+function getContactApiBases() {
+	const bases = [];
+	const savedApiBase = localStorage.getItem("contactsApiBase");
+
+	if (savedApiBase && savedApiBase.trim()) {
+		bases.push(savedApiBase.trim().replace(/\/$/, ""));
+	}
+
+	bases.push("http://localhost:3000");
+
+	return [...new Set(bases)];
+}
 
 async function handleContactSubmit(event) {
 	event.preventDefault();
@@ -282,20 +350,35 @@ async function handleContactSubmit(event) {
 	sendMessageButton.textContent = "Enviando...";
 
 	try {
-		const response = await fetch("http://localhost:3000/contatos", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(payload)
-		});
+		let lastError = null;
 
-		if (!response.ok) {
-			const errorBody = await response.json().catch(() => ({}));
-			throw new Error(errorBody.erro || "Nao foi possivel enviar sua mensagem.");
+		for (const apiBase of getContactApiBases()) {
+			try {
+				const response = await fetch(`${apiBase}/contatos`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(payload)
+				});
+
+				if (!response.ok) {
+					const errorBody = await response.json().catch(() => ({}));
+					throw new Error(errorBody.erro || "Nao foi possivel enviar sua mensagem.");
+				}
+
+				lastError = null;
+				break;
+			} catch (requestError) {
+				lastError = requestError;
+			}
 		}
 
-		contactFeedback.textContent = "mensagem recebida, retornaremos em breve";
+		if (lastError) {
+			throw lastError;
+		}
+
+		contactFeedback.textContent = "Mensagem recebida. Retornaremos em breve.";
 		contactFeedback.classList.add("success");
 		contactForm.reset();
 	} catch (error) {
@@ -309,4 +392,14 @@ async function handleContactSubmit(event) {
 
 if (contactForm) {
 	contactForm.addEventListener("submit", handleContactSubmit);
+}
+
+if (budgetButton) {
+	budgetButton.addEventListener("click", () => {
+		const phone = "5511976052590";
+		const text = "Olá, vim pelo site, desejo solicitar um orçamento";
+		const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+		window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+	});
 }

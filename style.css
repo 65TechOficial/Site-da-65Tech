@@ -133,10 +133,9 @@ header nav a {
     font-size: 15px;
     font-weight: 500;
     transition: color 0.3s ease, margin-left 0.3s ease, font-size 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
-    
 }
 
-header button {
+#budgetButton {
     background: var(--primary-blue);
     color: #fff;
     border: none;
@@ -146,6 +145,27 @@ header button {
     font-weight: 500;
     font-size: 15px;
     transition: background 0.3s ease, padding 0.3s ease, font-size 0.3s ease, transform 0.3s ease;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.menu-toggle svg path {
+    transition: transform 0.26s ease, opacity 0.2s ease;
+    transform-origin: 12px 12px;
+}
+
+header.menu-open .menu-toggle svg path:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+header.menu-open .menu-toggle svg path:nth-child(2) {
+    opacity: 0;
+}
+
+header.menu-open .menu-toggle svg path:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
 }
 
 header img {
@@ -164,13 +184,13 @@ header.scrolled:hover nav a {
     transform: translateY(-1px);
 }
 
-header.scrolled button {
+header.scrolled #budgetButton {
     padding: 8px 16px;
     font-size: 14px;
     transform: translateY(-1px);
 }
 
-header.scrolled:hover button {
+header.scrolled:hover #budgetButton {
     transform: translateY(-2px) scale(1.01);
 }
 
@@ -935,7 +955,6 @@ header.scrolled:hover button {
     transition: border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
-.contact-form select,
 .contact-form textarea {
     margin-bottom: 12px;
 }
@@ -965,9 +984,10 @@ header.scrolled:hover button {
     padding: 14px 16px;
     background: linear-gradient(90deg, #3f63ff 0%, #585dff 55%, #6d4dff 100%);
     color: #ffffff;
-    font-family: 'Inter', sans-serif;
-    font-size: 22px;
-    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.25px;
     cursor: pointer;
     transition: filter 0.22s ease, transform 0.22s ease;
 }
@@ -983,19 +1003,62 @@ header.scrolled:hover button {
 }
 
 .contact-feedback {
-    min-height: 24px;
-    margin-top: 10px;
+    display: none;
+    margin-top: 12px;
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
+    line-height: 1.4;
+    border-radius: 10px;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+}
+
+.contact-feedback:not(:empty) {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.contact-feedback.success::before,
+.contact-feedback.error::before {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+    content: "";
 }
 
 .contact-feedback.success {
-    color: #22C55E;
+    color: #b9f8d0;
+    background: linear-gradient(135deg, rgba(14, 56, 37, 0.92), rgba(10, 41, 29, 0.86));
+    border-color: rgba(43, 199, 122, 0.42);
+    box-shadow: 0 10px 28px rgba(7, 28, 20, 0.35);
+}
+
+.contact-feedback.success::before {
+    content: "✓";
+    color: #052312;
+    background: #31d67f;
 }
 
 .contact-feedback.error {
-    color: #EF4444;
+    color: #ffd3da;
+    background: linear-gradient(135deg, rgba(66, 23, 33, 0.92), rgba(48, 17, 25, 0.86));
+    border-color: rgba(239, 68, 68, 0.45);
+    box-shadow: 0 10px 28px rgba(28, 8, 14, 0.32);
+}
+
+.contact-feedback.error::before {
+    content: "!";
+    color: #3d0b14;
+    background: #ff6b80;
 }
 
 .site-footer {
@@ -1245,9 +1308,169 @@ header.scrolled:hover button {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 76px;
+    }
+
+    header {
+        padding: 8px 12px;
+    }
+
+    header img,
+    header.scrolled img {
+        height: 50px;
+    }
+
+    #budgetButton {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+        width: 42px;
+        height: 42px;
+        
+        border: 1px solid transparent;
+        background: transparent;
+        color: #e5ebff;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-toggle svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    header nav {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 12px;
+        right: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: 8px;
+        border-radius: 14px;
+        border: 1px solid rgba(124, 144, 255, 0.3);
+        background: rgba(8, 12, 28, 0.96);
+        box-shadow: 0 16px 38px rgba(2, 7, 24, 0.52);
+    }
+
+    header.menu-open nav {
+        display: flex;
+    }
+
+    header nav a,
+    header.scrolled nav a,
+    header.scrolled:hover nav a {
+        margin-left: 0;
+        width: 100%;
+        font-size: 14px;
+        opacity: 1;
+        transform: none;
+        padding: 10px 12px;
+        border-radius: 9px;
+    }
+
+    header nav a:hover {
+        background: rgba(103, 119, 255, 0.16);
+    }
+
+    .hero {
+        padding-bottom: 18px;
+    }
+
+    .container-left,
+    .container-right {
+        width: 100%;
+    }
+
+    .container-left {
+        margin-left: 0;
+        margin-top: 12px;
+        padding: 16px 12px 6px;
+        max-width: none;
+    }
+
+    .container-left h1 {
+        font-size: 34px;
+        line-height: 1.08;
+        margin-bottom: 10px;
+        max-width: 16ch;
+    }
+
+    .container-left p {
+        font-size: 12.5px;
+        line-height: 1.45;
+        margin-bottom: 12px;
+        max-width: 100%;
+    }
+
+    .container-left button {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .container-left .btn-secondary {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+
+    .benefits-strip {
+        margin-top: 14px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 100%;
+        gap: 6px;
+        padding: 10px 8px;
+    }
+
+    .benefit-item {
+        flex-direction: column;
+        gap: 4px;
+        align-items: center;
+        text-align: center;
+        padding: 0 2px;
+        min-height: 74px;
+    }
+
+    .benefit-item:not(:last-child) {
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .benefit-item h3 {
+        font-size: 9.5px;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .benefit-item p {
+        display: none;
+    }
+
     .services-portfolio {
-        width: calc(100% - 28px);
-        padding: 20px 16px;
+        width: 100%;
+        padding: 20px 12px;
+        gap: 20px;
+    }
+
+    .services-column,
+    .portfolio-column {
+        text-align: center;
+    }
+
+    .section-label {
+        text-align: center;
     }
 
     .services-column h2,
@@ -1257,15 +1480,33 @@ header.scrolled:hover button {
 
     .services-grid {
         grid-template-columns: 1fr;
+        max-width: 560px;
+        margin: 0 auto;
+    }
+
+    .service-card {
+        text-align: center;
+    }
+
+    .service-icon {
+        margin: 0 auto 12px;
     }
 
     .project-preview {
         height: 190px;
     }
 
+    .project-card,
+    .project-dots {
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .clinical-section {
-        width: calc(100% - 28px);
-        padding: 20px 16px 34px;
+        width: 100%;
+        padding: 20px 12px 30px;
+        text-align: center;
     }
 
     .clinical-process h2,
@@ -1290,6 +1531,8 @@ header.scrolled:hover button {
         grid-template-columns: 1fr;
         text-align: center;
         justify-items: center;
+        max-width: 560px;
+        margin: 0 auto;
     }
 
     .testimonial-photo {
@@ -1298,13 +1541,31 @@ header.scrolled:hover button {
     }
 
     .workflow-section {
-        width: calc(100% - 28px);
-        padding: 20px 16px 30px;
+        width: 100%;
+        padding: 20px 12px 28px;
+        text-align: center;
     }
 
     .contact-section {
-        width: calc(100% - 28px);
-        padding: 24px 16px 30px;
+        width: 100%;
+        padding: 22px 12px 28px;
+        text-align: center;
+    }
+
+    .contact-copy {
+        text-align: center;
+    }
+
+    .contact-copy ul {
+        display: inline-block;
+        text-align: left;
+    }
+
+    .contact-form {
+        max-width: 560px;
+        margin: 0 auto;
+        padding: 16px 14px;
+        border-radius: 14px;
     }
 
     .contact-copy h2 {
@@ -1318,20 +1579,48 @@ header.scrolled:hover button {
 
     .contact-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 14px;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        padding: 13px 14px;
+        font-size: 14px;
+        border-radius: 11px;
+    }
+
+    .contact-form select,
+    .contact-form textarea {
+        margin-bottom: 14px;
+    }
+
+    .contact-form textarea {
+        min-height: 132px;
     }
 
     .contact-form button {
-        font-size: 20px;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        padding: 13px 16px;
+        margin-top: 2px;
     }
 
     .site-footer {
-        width: calc(100% - 28px);
-        padding: 0 16px;
+        width: 100%;
+        padding: 0 12px;
+        text-align: center;
     }
 
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 18px;
+    }
+
+    .footer-social {
+        justify-content: center;
     }
 
     .footer-brand h3 {
@@ -1340,11 +1629,48 @@ header.scrolled:hover button {
 
     .footer-bottom {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
     }
 
     .workflow-track {
         grid-template-columns: 1fr;
+        gap: 16px;
+        padding-top: 0;
+        padding-left: 0;
+    }
+
+    .workflow-line {
+        display: block;
+        top: 34px;
+        bottom: 18px;
+        left: 0;
+        right: auto;
+        width: 2px;
+        height: auto;
+        transform: translateX(0) scaleY(0.7);
+        transform-origin: top center;
+        overflow: visible;
+    }
+
+    .workflow-progress {
+        position: relative;
+        width: 100%;
+        height: var(--workflow-progress);
+        transition: height 0.28s ease;
+    }
+
+    .workflow-progress::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        transform: translate(-50%, -50%);
+        background: #5e66ff;
+        box-shadow: 0 0 0 3px rgba(94, 102, 255, 0.25), 0 0 12px rgba(94, 102, 255, 0.65);
     }
 
     .workflow-section h2 {

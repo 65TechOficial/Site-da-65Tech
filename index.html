@@ -11,19 +11,26 @@
 <body>
     <header>
         <img src="./assets/Logo 65Tech.png" alt="">
-        <nav>
-            <a href="">Inicio</a>
-            <a href="">Serviços</a>
-            <a href="">Portifólio</a>
-            <a href="">Sobre</a>
-            <a href="">Processo</a>
-            <a href="">Depoimentos</a>
-            <a href="">Contato</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="siteNav">
+            <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                <path d="M4 7h16" />
+                <path d="M4 12h16" />
+                <path d="M4 17h16" />
+            </svg>
+        </button>
+        <nav id="siteNav">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#portfolio">Portifólio</a>
+            <a href="#como-trabalhamos">Sobre</a>
+            <a href="#processo">Processo</a>
+            <a href="#depoimentos">Depoimentos</a>
+            <a href="#contato">Contato</a>
     </nav>
         
-        <button>Solicitar Orçamento</button>
+        <button id="budgetButton" type="button">Solicitar Orçamento</button>
     </header>
-    <section class="hero">
+    <section class="hero" id="inicio">
         <div class="container-left">
             <h1>Sites e sistemas <span>profissionais para médicos e </span>  clínicas de destaque.</h1>
             <p>Transmita autoridade, conquiste mais pacientes e ofereça uma experiência digital impecável. Criamos soluções modernas, integradas e totalmente adequadas às normas éticas da saúde.</p>
@@ -75,7 +82,7 @@
     </section><!--hero-->
 
     <section class="services-portfolio" id="portfolio">
-        <div class="services-column">
+        <div class="services-column" id="servicos">
             <p class="section-label">NOSSOS SERVIÇOS</p>
             <h2>Soluções completas<br>para o <span>seu negócio.</span></h2>
 
@@ -153,62 +160,7 @@
     </section>
 
     <section class="clinical-section" id="processo">
-        <div class="clinical-process">
-            <p class="section-label">PROCESSO</p>
-            <h2>Como Transformamos Sua Clínica</h2>
-
-            <div class="process-grid">
-                <article class="process-step">
-                    <div class="process-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" role="img">
-                            <path d="M10.5 4a6.5 6.5 0 1 0 4.1 11.6l4.9 4.9 1.4-1.4-4.9-4.9A6.5 6.5 0 0 0 10.5 4z" />
-                            <path d="M10.5 7v3" />
-                            <path d="M10.5 10h2.2" />
-                        </svg>
-                    </div>
-                    <h3>Diagnóstico & Estratégia</h3>
-                    <p>Entendemos as necessidades específicas da sua especialidade.</p>
-                </article>
-
-                <article class="process-step">
-                    <div class="process-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" role="img">
-                            <path d="M4 20h16" />
-                            <path d="M6 18V6h12v12" />
-                            <path d="M9 15 15 9" />
-                            <path d="M9 9l6 6" />
-                        </svg>
-                    </div>
-                    <h3>Design Exclusivo</h3>
-                    <p>Criamos uma interface moderna que reflete sua autoridade.</p>
-                </article>
-
-                <article class="process-step">
-                    <div class="process-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" role="img">
-                            <path d="M9 3 3 7v10l6 4 6-4V7L9 3z" />
-                            <path d="M8 12h8" />
-                            <path d="M12 8v8" />
-                        </svg>
-                    </div>
-                    <h3>Desenvolvimento Seguro</h3>
-                    <p>Construímos soluções rápidas e adequadas às normas de saúde.</p>
-                </article>
-
-                <article class="process-step">
-                    <div class="process-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" role="img">
-                            <path d="M20 7 10.2 16.8 4 10.6l1.4-1.4 4.8 4.8L18.6 5.6 20 7z" />
-                            <path d="M3 19h18" />
-                        </svg>
-                    </div>
-                    <h3>Entrega & Suporte</h3>
-                    <p>Treinamento completo e manutenção contínua do seu sistema.</p>
-                </article>
-            </div>
-        </div>
-
-        <div class="clinical-testimonials">
+        <div class="clinical-testimonials" id="depoimentos">
             <p class="section-label">PROVA SOCIAL</p>
             <h2>O que Nossos Clientes Dizem</h2>
 
@@ -259,8 +211,9 @@
             <button class="workflow-step active" type="button" data-step="0" aria-label="Conversa inicial">
                 <span class="workflow-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" role="img">
-                        <path d="M12 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
-                        <path d="M4 19a8 8 0 0 1 16 0" />
+                        <path d="M4 5h10a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3H9l-4 3v-3H4a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z" />
+                        <circle cx="8" cy="10" r="0.8" />
+                        <circle cx="11" cy="10" r="0.8" />
                     </svg>
                 </span>
                 <span class="workflow-number">01</span>
@@ -271,10 +224,9 @@
             <button class="workflow-step" type="button" data-step="1" aria-label="Planejamento">
                 <span class="workflow-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" role="img">
-                        <path d="M4 5h16v14H4z" />
-                        <path d="M8 3v4" />
-                        <path d="M16 3v4" />
-                        <path d="M8 11h8" />
+                        <path d="M9 2h6v4H9z" />
+                        <path d="M7 6H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1" />
+                        <path d="m8.5 13 2 2 4-4" />
                     </svg>
                 </span>
                 <span class="workflow-number">02</span>
@@ -285,10 +237,9 @@
             <button class="workflow-step" type="button" data-step="2" aria-label="Design">
                 <span class="workflow-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" role="img">
-                        <path d="M4 4h7v7H4z" />
-                        <path d="M13 4h7v7h-7z" />
-                        <path d="M4 13h7v7H4z" />
-                        <path d="M13 13h7v7h-7z" />
+                        <path d="m4 20 4.5-1 9.8-9.8-3.5-3.5L5 15.5 4 20z" />
+                        <path d="m13.8 6.2 3.5 3.5" />
+                        <path d="M4 20h6" />
                     </svg>
                 </span>
                 <span class="workflow-number">03</span>
@@ -299,8 +250,9 @@
             <button class="workflow-step" type="button" data-step="3" aria-label="Desenvolvimento">
                 <span class="workflow-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" role="img">
-                        <path d="M14 4 6 12l8 8" />
-                        <path d="M10 4 18 12l-8 8" />
+                        <path d="m9 6-5 6 5 6" />
+                        <path d="m15 6 5 6-5 6" />
+                        <path d="M13 4 11 20" />
                     </svg>
                 </span>
                 <span class="workflow-number">04</span>
@@ -311,9 +263,10 @@
             <button class="workflow-step" type="button" data-step="4" aria-label="Revisão">
                 <span class="workflow-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" role="img">
-                        <path d="M4 7h16l-1 13H5L4 7z" />
-                        <path d="M9 7V5a3 3 0 0 1 6 0v2" />
-                        <path d="M8 12h8" />
+                        <path d="M9 2h6v4H9z" />
+                        <path d="M7 6H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1" />
+                        <path d="m8.5 13 2 2 4-4" />
+                        <path d="M8 17h8" />
                     </svg>
                 </span>
                 <span class="workflow-number">05</span>
@@ -324,9 +277,9 @@
             <button class="workflow-step" type="button" data-step="5" aria-label="Publicação">
                 <span class="workflow-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" role="img">
-                        <path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
-                        <path d="M10 7h4" />
-                        <path d="M10 17h4" />
+                        <path d="M7 18h10a4 4 0 0 0 .6-8 6 6 0 0 0-11.4 1.8A3.5 3.5 0 0 0 7 18z" />
+                        <path d="M12 16V9" />
+                        <path d="m9 12 3-3 3 3" />
                     </svg>
                 </span>
                 <span class="workflow-number">06</span>
