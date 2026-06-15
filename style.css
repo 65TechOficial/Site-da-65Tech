@@ -151,6 +151,10 @@ header nav a {
     display: none;
 }
 
+.mobile-budget-button {
+    display: none;
+}
+
 .menu-toggle svg path {
     transition: transform 0.26s ease, opacity 0.2s ease;
     transform-origin: 12px 12px;
@@ -1382,6 +1386,22 @@ header.scrolled:hover #budgetButton {
 
     header nav a:hover {
         background: rgba(103, 119, 255, 0.16);
+    }
+
+    .mobile-budget-button {
+        display: block;
+        width: 100%;
+        margin-top: 8px;
+        border: none;
+        border-radius: 10px;
+        padding: 11px 12px;
+        background: var(--primary-blue);
+        color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
     }
 
     .hero {

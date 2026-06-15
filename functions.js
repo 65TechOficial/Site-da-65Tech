@@ -34,6 +34,8 @@ const previewEl = document.getElementById("projectPreview");
 const linkEl = document.getElementById("projectLink");
 const nextButton = document.getElementById("projectNext");
 const dotsContainer = document.getElementById("projectDots");
+const viewProjectsButton = document.getElementById("viewProjectsButton");
+const portfolioSection = document.getElementById("portfolio");
 
 function renderProject(index) {
 	const project = projects[index];
@@ -59,6 +61,18 @@ if (nextButton) {
 	});
 
 	renderProject(currentProject);
+}
+
+if (viewProjectsButton && portfolioSection) {
+	viewProjectsButton.addEventListener("click", () => {
+		const headerOffset = header ? header.offsetHeight + 10 : 0;
+		const targetTop = portfolioSection.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+		window.scrollTo({
+			top: targetTop,
+			behavior: "smooth"
+		});
+	});
 }
 
 const header = document.querySelector("header");
@@ -303,6 +317,9 @@ const contactForm = document.getElementById("contactForm");
 const contactFeedback = document.getElementById("contactFeedback");
 const sendMessageButton = document.getElementById("sendMessageButton");
 const budgetButton = document.getElementById("budgetButton");
+const budgetButtonMobile = document.getElementById("budgetButtonMobile");
+const ButtonMensage = document.getElementById("ButonMensage");
+
 
 function getContactsApiBase() {
 	const savedApiBase = localStorage.getItem("contactsApiBase");
@@ -394,12 +411,20 @@ if (contactForm) {
 	contactForm.addEventListener("submit", handleContactSubmit);
 }
 
-if (budgetButton) {
-	budgetButton.addEventListener("click", () => {
-		const phone = "5511976052590";
-		const text = "Olá, vim pelo site, desejo solicitar um orçamento";
-		const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+function openBudgetWhatsapp() {
+	const phone = "5511976052590";
+	const text = "Olá, vim pelo site, desejo solicitar um orçamento";
+	const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 
-		window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-	});
+	if (window.innerWidth <= 768) {
+		closeMobileMenu();
+	}
+
+	window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 }
+
+[budgetButton, budgetButtonMobile, ButtonMensage].forEach((button) => {
+	if (button) {
+		button.addEventListener("click", openBudgetWhatsapp);
+	}
+});
