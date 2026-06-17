@@ -6,11 +6,17 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/65tech';
+const rawMongoUri = (process.env.MONGO_URI || '').trim();
+const MONGO_URI = rawMongoUri || 'mongodb://localhost:27017/65tech';
 const MAIL_FROM = process.env.MAIL_FROM || process.env.EMAIL_USER;
 const MAIL_TO = process.env.MAIL_TO || 'contato.65tech@gmail.com';
 const ADMIN_PANEL_PASSWORD = process.env.ADMIN_PANEL_PASSWORD || '';
 let isMongoConnected = false;
+
+console.log(`[CONFIG] MONGO_URI ${rawMongoUri ? 'detectada' : 'nao detectada'} no ambiente.`);
+if (!rawMongoUri && process.env.RENDER) {
+  console.error('[CONFIG] Defina MONGO_URI em Environment Variables no Render.');
+}
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',

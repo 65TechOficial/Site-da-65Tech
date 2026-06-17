@@ -323,23 +323,36 @@ const ButtonMensage = document.getElementById("ButonMensage");
 
 function getContactsApiBase() {
 	const savedApiBase = localStorage.getItem("contactsApiBase");
+	const configuredApiBase = (window.CONTACTS_API_BASE || "").toString().trim();
+	const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
 	if (savedApiBase && savedApiBase.trim()) {
 		return savedApiBase.trim().replace(/\/$/, "");
 	}
 
-	return "http://localhost:3000";
+	if (configuredApiBase) {
+		return configuredApiBase.replace(/\/$/, "");
+	}
+
+	if (isLocalHost) {
+		return "http://localhost:3000";
+	}
+
+	return "";
 }
 
 function getContactApiBases() {
 	const bases = [];
-	const savedApiBase = localStorage.getItem("contactsApiBase");
+	const preferredBase = getContactsApiBase();
+	const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
-	if (savedApiBase && savedApiBase.trim()) {
-		bases.push(savedApiBase.trim().replace(/\/$/, ""));
+	if (preferredBase) {
+		bases.push(preferredBase);
 	}
 
-	bases.push("http://localhost:3000");
+	if (isLocalHost) {
+		bases.push("http://localhost:3000");
+	}
 
 	return [...new Set(bases)];
 }
@@ -368,8 +381,13 @@ async function handleContactSubmit(event) {
 
 	try {
 		let lastError = null;
+		const apiBases = getContactApiBases();
 
-		for (const apiBase of getContactApiBases()) {
+		if (!apiBases.length) {
+			throw new Error("API de contatos nao configurada para este dominio.");
+		}
+
+		for (const apiBase of apiBases) {
 			try {
 				const response = await fetch(`${apiBase}/contatos`, {
 					method: "POST",
