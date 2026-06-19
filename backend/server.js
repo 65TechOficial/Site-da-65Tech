@@ -45,7 +45,8 @@ const contatoSchema = new mongoose.Schema(
     email: { type: String, required: true, trim: true, lowercase: true },
     whatsapp: { type: String, required: true },
     tipoProjeto: { type: String, required: true, trim: true },
-    mensagem: { type: String, required: true, trim: true }
+    mensagem: { type: String, required: true, trim: true },
+    deletado_em: { type: Date, default: null }
   },
   { timestamps: { createdAt: 'criado_em', updatedAt: false } }
 );
@@ -165,7 +166,7 @@ app.post('/contatos', async (req, res) => {
   }
 });
 
-// GET /contatos  →  lista todos os contatos (uso interno / admin)
+// GET /contatos  →  lista todos os contatos ativos (uso interno / admin)
 app.get('/contatos', async (_req, res) => {
   return requireAdminAccess(_req, res, async () => {
   if (!isMongoConnected) {
@@ -173,7 +174,7 @@ app.get('/contatos', async (_req, res) => {
   }
 
   try {
-    const contatos = await Contato.find().sort({ criado_em: -1 });
+    const contatos = await Contato.find({ deletado_em: null }).sort({ criado_em: -1 });
     return res.json(contatos);
   } catch (err) {
     return res.status(500).json({ erro: 'Erro ao buscar contatos.' });
@@ -181,7 +182,7 @@ app.get('/contatos', async (_req, res) => {
   });
 });
 
-// DELETE /contatos/:id  →  remove um contato (uso interno / admin)
+// DELETE /contatos/:id  →  faz soft delete de um contato (uso interno / admin)
 app.delete('/contatos/:id', async (req, res) => {
   return requireAdminAccess(req, res, async () => {
   if (!isMongoConnected) {
@@ -189,11 +190,48 @@ app.delete('/contatos/:id', async (req, res) => {
   }
 
   try {
-    const result = await Contato.findByIdAndDelete(req.params.id);
+    const result = await Contato.findByIdAndUpdate(req.params.id, { deletado_em: new Date() }, { new: true });
     if (!result) return res.status(404).json({ erro: 'Contato não encontrado.' });
     return res.json({ mensagem: 'Contato removido.' });
   } catch (err) {
     return res.status(500).json({ erro: 'Erro ao remover contato.' });
+  }
+  });
+});
+
+// GET /contatos-deletados  →  lista todos os contatos deletados (uso interno / admin)
+app.get('/contatos-deletados', async (_req, res) => {
+  return requireAdminAccess(_req, res, async () => {
+  if (!isMongoConnected) {
+    console.log('[DELETADOS] MongoDB não está conectado');
+    return res.status(503).json({ erro: 'MongoDB indisponível no momento.' });
+  }
+
+  try {
+    console.log('[DELETADOS] Buscando contatos deletados...');
+    const contatos = await Contato.find({ deletado_em: { $ne: null } }).sort({ deletado_em: -1 });
+    console.log(`[DELETADOS] Encontrados ${contatos.length} contatos deletados`);
+    return res.json(contatos);
+  } catch (err) {
+    console.error('[DELETADOS] Erro ao buscar:', err.message);
+    return res.status(500).json({ erro: 'Erro ao buscar contatos deletados.' });
+  }
+  });
+});
+
+// PUT /contatos/:id/restaurar  →  restaura um contato deletado (uso interno / admin)
+app.put('/contatos/:id/restaurar', async (req, res) => {
+  return requireAdminAccess(req, res, async () => {
+  if (!isMongoConnected) {
+    return res.status(503).json({ erro: 'MongoDB indisponível no momento.' });
+  }
+
+  try {
+    const result = await Contato.findByIdAndUpdate(req.params.id, { deletado_em: null }, { new: true });
+    if (!result) return res.status(404).json({ erro: 'Contato não encontrado.' });
+    return res.json({ mensagem: 'Contato restaurado.' });
+  } catch (err) {
+    return res.status(500).json({ erro: 'Erro ao restaurar contato.' });
   }
   });
 });

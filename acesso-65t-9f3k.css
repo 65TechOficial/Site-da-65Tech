@@ -103,6 +103,16 @@ h1 {
     color: var(--text);
 }
 
+.controls select {
+    width: 100%;
+    background: #0a132d;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    cursor: pointer;
+}
+
 .auth-controls input {
     width: 100%;
     background: #0a132d;
@@ -198,6 +208,22 @@ td.message {
     color: #fff;
     background: var(--danger);
     cursor: pointer;
+}
+
+.action-btn.restore {
+    background: var(--success);
+}
+
+.action-btn:hover {
+    opacity: 0.8;
+}
+
+#deletedContactsSection table th {
+    background: #1a2844;
+}
+
+#deletedContactsSection td {
+    color: #a0afc2;
 }
 
 .empty-row {

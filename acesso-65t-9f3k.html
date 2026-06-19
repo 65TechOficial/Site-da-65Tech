@@ -25,6 +25,14 @@
             <button id="refreshContacts" type="button">Atualizar lista</button>
         </section>
 
+        <section class="controls">
+            <label for="viewToggle">Visualizar:</label>
+            <select id="viewToggle">
+                <option value="active">Contatos Ativos</option>
+                <option value="deleted">Contatos Deletados</option>
+            </select>
+        </section>
+
         <section class="auth-controls">
             <label for="adminPassword">Senha de acesso</label>
             <input id="adminPassword" type="password" placeholder="Digite sua senha admin">
@@ -34,7 +42,7 @@
 
         <p id="statusMessage" class="status" aria-live="polite"></p>
 
-        <section class="table-wrapper">
+        <section class="table-wrapper" id="activeContactsSection">
             <table>
                 <thead>
                     <tr>
@@ -49,6 +57,24 @@
                     </tr>
                 </thead>
                 <tbody id="contactsTableBody"></tbody>
+            </table>
+        </section>
+
+        <section class="table-wrapper" id="deletedContactsSection" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Empresa</th>
+                        <th>WhatsApp</th>
+                        <th>E-mail</th>
+                        <th>Tipo</th>
+                        <th>Mensagem</th>
+                        <th>Deletado em</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="deletedContactsTableBody"></tbody>
             </table>
         </section>
     </main>

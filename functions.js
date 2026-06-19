@@ -2,18 +2,18 @@ const projects = [
 	{
 		title: "Injet Nobre",
 		category: "Site institucional para clinica especializada",
-		description: "Apresentacao digital voltada para clinicas e consultorios, com foco em autoridade medica, clareza de servicos e contato rapido para novos pacientes.",
+		description: "Apresentação digital voltada para clínicas e consultórios, com foco em autoridade médica, clareza de serviços e contato rápido para novos pacientes.",
 		image: "./assets/Mockups Injet Nobre.png",
 		imageAlt: "Preview do projeto Injet Nobre",
 		link: "https://gabriel100-pro.github.io/Site-oficial-InjetNobre/"
 	},
 	{
-		title: "Controle de Estoque",
-		category: "Sistema interno para clinicas e farmacias",
-		description: "Fluxo de gestao de insumos medicos e medicamentos com visao clara de entradas, saidas e itens criticos para apoiar operacao segura no dia a dia.",
-		image: "./assets/Mockup Controle de Estoque.png",
-		imageAlt: "Preview do projeto Controle de Estoque",
-		link: "https://gabriel100-pro.github.io/Controle-de-estoque/"
+		title: "Mikaela Estética",
+		category: "Site institucional para profissional de estética",
+		description: "Apresentação digital elegante para destacar serviços, autoridade e contato rápido, com foco em uma experiência limpa e profissional para clientes.",
+		image: "./assets/Mikaela Estética.png",
+		imageAlt: "Preview do projeto Mikaela Estética",
+		link: "https://gabriel100-pro.github.io/Mikaela-Est-tica/"
 	},
 	{
 		title: "Agendamento",

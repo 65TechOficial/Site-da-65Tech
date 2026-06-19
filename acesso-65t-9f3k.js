@@ -6,6 +6,10 @@ const saveAdminPasswordButton = document.getElementById("saveAdminPassword");
 const clearAdminPasswordButton = document.getElementById("clearAdminPassword");
 const statusMessage = document.getElementById("statusMessage");
 const contactsTableBody = document.getElementById("contactsTableBody");
+const deletedContactsTableBody = document.getElementById("deletedContactsTableBody");
+const viewToggle = document.getElementById("viewToggle");
+const activeContactsSection = document.getElementById("activeContactsSection");
+const deletedContactsSection = document.getElementById("deletedContactsSection");
 
 const savedApiBase = localStorage.getItem("contactsApiBase") || "http://localhost:3000";
 const savedAdminPassword = sessionStorage.getItem("adminPanelPassword") || "";
@@ -63,6 +67,22 @@ function renderEmptyState(message) {
     td.textContent = message;
     row.appendChild(td);
     contactsTableBody.appendChild(row);
+}
+
+function clearDeletedTable() {
+    deletedContactsTableBody.innerHTML = "";
+}
+
+function renderDeletedEmptyState(message) {
+    clearDeletedTable();
+
+    const row = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 8;
+    td.className = "empty-row";
+    td.textContent = message;
+    row.appendChild(td);
+    deletedContactsTableBody.appendChild(row);
 }
 
 function getAdminPassword() {
@@ -134,6 +154,63 @@ async function fetchContacts() {
     }
 }
 
+async function fetchDeletedContacts() {
+    const base = apiBaseInput.value.trim();
+
+    if (!base) {
+        setStatus("Defina a URL da API.", "error");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${base}/contatos-deletados`, {
+            headers: {
+                "x-admin-password": getAdminPassword()
+            }
+        });
+        const body = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(body.erro || "Nao foi possivel carregar os contatos deletados.");
+        }
+
+        if (!Array.isArray(body) || body.length === 0) {
+            renderDeletedEmptyState("Nenhum contato deletado.");
+            setStatus("Nenhum contato deletado encontrado.", "success");
+            return;
+        }
+
+        clearDeletedTable();
+
+        body.forEach((contact) => {
+            const row = document.createElement("tr");
+            row.appendChild(createCell(contact.nome));
+            row.appendChild(createCell(contact.empresa));
+            row.appendChild(createCell(contact.whatsapp));
+            row.appendChild(createCell(contact.email));
+            row.appendChild(createCell(contact.tipoProjeto));
+            row.appendChild(createCell(contact.mensagem, "message"));
+            row.appendChild(createCell(formatDate(contact.deletado_em)));
+
+            const actionCell = document.createElement("td");
+            const restoreButton = document.createElement("button");
+            restoreButton.type = "button";
+            restoreButton.className = "action-btn restore";
+            restoreButton.textContent = "Restaurar";
+            restoreButton.addEventListener("click", () => restoreContact(contact._id));
+            actionCell.appendChild(restoreButton);
+            row.appendChild(actionCell);
+
+            deletedContactsTableBody.appendChild(row);
+        });
+
+        setStatus("Contatos deletados carregados.", "success");
+    } catch (error) {
+        renderDeletedEmptyState("Falha ao carregar contatos deletados.");
+        setStatus(error.message || "Erro ao carregar contatos deletados.", "error");
+    }
+}
+
 async function deleteContact(contactId) {
     if (!contactId) {
         return;
@@ -164,6 +241,40 @@ async function deleteContact(contactId) {
         fetchContacts();
     } catch (error) {
         setStatus(error.message || "Erro ao remover contato.", "error");
+    }
+}
+
+async function restoreContact(contactId) {
+    if (!contactId) {
+        return;
+    }
+
+    const confirmed = window.confirm("Deseja restaurar este contato?");
+
+    if (!confirmed) {
+        return;
+    }
+
+    const base = apiBaseInput.value.trim();
+
+    try {
+        const response = await fetch(`${base}/contatos/${contactId}/restaurar`, {
+            method: "PUT",
+            headers: {
+                "x-admin-password": getAdminPassword()
+            }
+        });
+        const body = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(body.erro || "Nao foi possivel restaurar o contato.");
+        }
+
+        setStatus("Contato restaurado com sucesso.", "success");
+        fetchDeletedContacts();
+        fetchContacts();
+    } catch (error) {
+        setStatus(error.message || "Erro ao restaurar contato.", "error");
     }
 }
 
@@ -203,6 +314,17 @@ adminPasswordInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         event.preventDefault();
         saveAdminPasswordButton.click();
+    }
+});
+
+viewToggle.addEventListener("change", (event) => {
+    if (event.target.value === "active") {
+        activeContactsSection.style.display = "block";
+        deletedContactsSection.style.display = "none";
+    } else {
+        activeContactsSection.style.display = "none";
+        deletedContactsSection.style.display = "block";
+        fetchDeletedContacts();
     }
 });
 
