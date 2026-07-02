@@ -10,22 +10,31 @@
 
 <body>
     <header class="site-header">
-        <img src="./assets/Logo 65Tech.png" alt="65Tech Logo">
+        <a href="">65Tech</a>
 
         <nav id="siteNav">
-            <a href="#inicio">Inicio</a>
-            <a href="#inicio">Quem somos</a>
-            <a href="#inicio">Soluções</a>
-            <a href="#inicio">Cases</a>
-            <a href="#inicio">Depoimentos</a>
-            <a href="#contato">Contato</a>
-            <a href="#" class="lang-link" aria-label="Selecionar idioma">PT <span aria-hidden="true">˅</span></a>
+            <a href="#inicio" data-i18n="nav.home">Inicio</a>
+            <a href="#inicio" data-i18n="nav.about">Quem somos</a>
+            <a href="#inicio" data-i18n="nav.solutions">Soluções</a>
+            <a href="#inicio" data-i18n="nav.cases">Cases</a>
+            <a href="#inicio" data-i18n="nav.testimonials">Depoimentos</a>
+            <a href="#contato" data-i18n="nav.contact">Contato</a>
+            <div class="lang-switcher">
+                <button id="langToggle" class="lang-toggle" type="button" aria-label="Selecionar idioma"
+                    aria-expanded="false">PT <span aria-hidden="true">˅</span></button>
+                <div class="lang-menu" id="langMenu" role="menu" aria-label="Idiomas">
+                    <button type="button" class="lang-option active" data-lang="pt" role="menuitem">Português</button>
+                    <button type="button" class="lang-option" data-lang="en" role="menuitem">English</button>
+                    <button type="button" class="lang-option" data-lang="es" role="menuitem">Español</button>
+                </div>
+            </div>
             <button id="budgetButtonMobile" class="mobile-budget-button" type="button">Contrate a 65Tech</button>
         </nav>
 
         <button id="budgetButton" type="button">Contrate a 65Tech</button>
 
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="siteNav">
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false"
+            aria-controls="siteNav">
             <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                 <path d="M4 7h16" />
                 <path d="M4 12h16" />
@@ -38,19 +47,22 @@
         <div class="hero-backdrop" aria-hidden="true"></div>
 
         <div class="container-left">
-            
-            <h1>Criamos <span>sites impactantes</span> com experiência visual que aumenta conversões.</h1>
-            <p>Unimos design, estratégia e tecnologia para negócios que querem transmitir autoridade e fechar mais clientes no digital.</p>
+
+            <h1 data-i18n="hero.title">Criamos <span>sites impactantes</span> com experiência visual que aumenta
+                conversões.</h1>
+            <p data-i18n="hero.subtitle">Unimos design, estratégia e tecnologia para negócios que querem transmitir
+                autoridade e fechar mais clientes no digital.</p>
 
             <div class="hero-cta-row">
-                <button id="ButonMensage" class="btn-primary">Iniciar Meu Projeto</button>
-                <button id="viewProjectsButton" class="btn-secondary" type="button">Ver Projetos</button>
+                <button id="ButonMensage" class="btn-primary" data-i18n="hero.ctaPrimary">Iniciar Meu Projeto</button>
+                <button id="viewProjectsButton" class="btn-secondary" type="button" data-i18n="hero.ctaSecondary">Ver
+                    Projetos</button>
             </div>
 
             <div class="hero-points">
-                <span>Design autoral</span>
-                <span>Alta performance</span>
-                <span>Foco em resultado</span>
+                <span data-i18n="hero.point1">Design autoral</span>
+                <span data-i18n="hero.point2">Alta performance</span>
+                <span data-i18n="hero.point3">Foco em resultado</span>
             </div>
         </div>
 
@@ -58,28 +70,38 @@
             <div class="hero-collage" aria-label="Montagem com projetos da 65Tech">
                 <img src="./assets/Mockups Injet Nobre.png" alt="Projeto Injet Nobre" class="hero-card hero-card-left">
                 <img src="./assets/Mosckup Agendamento.png" alt="Projeto Agendamento" class="hero-card hero-card-right">
-                <img src="./assets/Mikaela Estética.png" alt="Projeto Mikaela Estética" class="hero-card hero-card-main">
-                <img src="./assets/Mockup Controle de Estoque.png" alt="Projeto Controle de Estoque" class="hero-card hero-card-bottom-left">
-                <img src="./assets/layout mobile 65Tech.png" alt="Layout mobile 65Tech" class="hero-card hero-card-bottom-right">
-                         
+                <img src="./assets/Mikaela Estética.png" alt="Projeto Mikaela Estética"
+                    class="hero-card hero-card-main">
+                <img src="./assets/Mockup Controle de Estoque.png" alt="Projeto Controle de Estoque"
+                    class="hero-card hero-card-bottom-left">
+                <img src="./assets/layout mobile 65Tech.png" alt="Layout mobile 65Tech"
+                    class="hero-card hero-card-bottom-right">
+
             </div>
         </div>
-         <div class="hero-highlights" aria-label="Diferenciais de layout 65Tech">
-        <div class="hero-highlights-row">
-            
-            <p><span aria-hidden="true">■</span> Elevamos a experiência do usuário em outro nível</p>
-            <p><span aria-hidden="true">■</span> Entregamos layouts elegantes e envolventes</p>
-            <p><span aria-hidden="true">■</span> Com telas personalizadas para cada objetivo</p>
+        <div class="hero-highlights" aria-label="Diferenciais de layout 65Tech">
+            <div class="hero-highlights-row">
+
+                <p><span aria-hidden="true">■</span> <span data-i18n="hero.highlight1">Elevamos a experiência do usuário
+                        em outro nível</span></p>
+                <p><span aria-hidden="true">■</span> <span data-i18n="hero.highlight2">Entregamos layouts elegantes e
+                        envolventes</span></p>
+                <p><span aria-hidden="true">■</span> <span data-i18n="hero.highlight3">Com telas personalizadas para
+                        cada objetivo</span></p>
+            </div>
+            <button class="hero-highlights-cta" id="heroHighlightsCta" type="button"
+                data-i18n="hero.highlightCta">Descubra como criar sites mais atrativos</button>
         </div>
-        <button class="hero-highlights-cta" id="heroHighlightsCta" type="button">Descubra como criar sites mais atrativos</button>
-    </div>
 
         <div class="hero-experience" aria-label="Bloco experiência digital">
             <div class="hero-experience-copy">
-                <h2>CRIAMOS <span>EXPERIÊNCIAS DIGITAIS</span></h2>
-                <p>Projetando interfaces interativas através de conteúdos atrativos que alavancam sua captação de leads e conversões.</p>
-                <p>Nossos sites são pensados em cada detalhe para proporcionar uma experiência única, inserindo cada foto, botão e ícone no local exato onde irão converter.</p>
-                <p>Tudo isso sem deixar de lado o rankeamento nas plataformas de pesquisa e oferecendo uma navegação rápida, intuitiva, focada na experiência do usuário.</p>
+                <h2 data-i18n="exp.title">CRIAMOS <span>EXPERIÊNCIAS DIGITAIS</span></h2>
+                <p data-i18n="exp.p1">Projetando interfaces interativas através de conteúdos atrativos que alavancam sua
+                    captação de leads e conversões.</p>
+                <p data-i18n="exp.p2">Nossos sites são pensados em cada detalhe para proporcionar uma experiência única,
+                    inserindo cada foto, botão e ícone no local exato onde irão converter.</p>
+                <p data-i18n="exp.p3">Tudo isso sem deixar de lado o rankeamento nas plataformas de pesquisa e
+                    oferecendo uma navegação rápida, intuitiva, focada na experiência do usuário.</p>
             </div>
 
             <div class="hero-experience-visual" aria-hidden="true">
@@ -88,19 +110,75 @@
                 <div class="tablet-shadow"></div>
             </div>
         </div>
+
+        <div class="hero-injet-field" aria-label="Destaque visual do projeto Injet Nobre">
+            <button class="hero-injet-top-cta" id="heroInjetCta" type="button" data-i18n="injet.topCta">Construa seu
+                site agora</button>
+            <img src="./assets/img sem fundo injet Nobre.png" alt="Mockup do projeto Injet Nobre"
+                class="hero-injet-image">
+            <p class="hero-injet-caption" data-i18n="injet.caption">RECEBA MAIS CONTATOS ATRAVÉS DE UM <span>SITE
+                    PLANEJADO PARA GERAR CONVERSÕES</span></p>
+        </div>
+
+        <div class="hero-services-cards" aria-label="Cards de serviços estratégicos">
+            <div>
+                <article class="hero-service-card">
+                    <h3 data-i18n="cards.ux.title"><span>UX </span>DESIGN</h3>
+                    <p data-i18n="cards.ux.p1">Desenvolvemos interfaces incríveis pensando em cada detalhe para
+                        proporcionar a sua marca uma plataforma moderna e eficiente, capaz de encantar e atrair mais
+                        resultados.</p>
+                    <p data-i18n="cards.ux.p2">Para isso, disponibilizamos ferramentas completas com mapas de calor,
+                        filmagens de ações de clientes e métricas de acessos, regiões e perfil para orientar sua tomada
+                        de decisões.</p>
+                    <button type="button" class="hero-service-cta" data-i18n="cards.ux.cta">SOLICITE SEU SITE
+                        INTELIGENTE</button>
+                </article>
+                <article class="hero-service-card">
+                    <h3 data-i18n="cards.layout.title"><span></span>LAYOUT </span>DO SITE</h3>
+                    <p data-i18n="cards.layout.p1">Oferecemos as principais tendências para que sua marca tenha um site
+                        que se destaque entre os concorrentes, com combinações de cores modernas que transmitam a sua
+                        essência.</p>
+                    <p data-i18n="cards.layout.p2">Estaremos lado a lado para transformar seu briefing dos sonhos em um
+                        projeto real e acima da sua expectativa, independentemente da quantidade de edições que você
+                        precisar.</p>
+                    <button type="button" class="hero-service-cta" data-i18n="cards.layout.cta">CONSTRUA SEU FUNIL COM
+                        UM ESPECIALISTA</button>
+                </article>
+            </div>
+            <div>
+                <article class="hero-service-card">
+                    <h3 data-i18n="cards.content.title"><span>CONTEÚDO </span>DO SITE</h3>
+                    <p data-i18n="cards.content.p1">Vamos além do básico para criar e colocar, em cada tela, a descrição
+                        perfeita dos seus serviços, orientando o usuário com clareza para a decisão certa.</p>
+                    <p data-i18n="cards.content.p2">Todo texto é planejado para comunicar valor, gerar confiança e
+                        fortalecer o posicionamento da sua marca ao longo da jornada de compra.</p>
+                    <button type="button" class="hero-service-cta" data-i18n="cards.content.cta">TENHA CONTEÚDO QUE
+                        CONVERTE</button>
+                </article>
+                <article class="hero-service-card">
+                    <h3 data-i18n="cards.code.title"><span>PROGRAMAÇÃO </span>DO SITE</h3>
+                    <p data-i18n="cards.code.p1">Transformamos ideias em projetos reais, trabalhando em cada código para
+                        oferecer uma experiência atrativa em todas as plataformas.</p>
+                    <p data-i18n="cards.code.p2">Criamos uma estrutura rápida, segura e preparada para crescer,
+                        garantindo estabilidade e performance para o seu negócio.</p>
+                    <button type="button" class="hero-service-cta" data-i18n="cards.code.cta">QUERO UM SITE DE ALTA
+                        PERFORMANCE</button>
+                </article>
+                </div>
+            </div>
         
 
-        
+
     </section><!--hero-->
 
-   
+
 
     <section class="contact-section" id="contato">
         <div class="contact-copy">
             <h2>Pronto para transformar<br>seu negócio?</h2>
             <p>Solicite um orçamento sem compromisso e vamos conversar sobre o seu projeto.</p>
             <ul>
-                <li>Resposta rápida</li>  
+                <li>Resposta rápida</li>
                 <li>Orçamento gratuito</li>
                 <li>Soluções personalizadas</li>
             </ul>
@@ -123,7 +201,8 @@
                 <option value="Outro">Outro</option>
             </select>
 
-            <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre o seu projeto..." rows="4" required></textarea>
+            <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre o seu projeto..." rows="4"
+                required></textarea>
 
             <button type="submit" id="sendMessageButton">Enviar Mensagem</button>
             <p class="contact-feedback" id="contactFeedback" aria-live="polite"></p>
@@ -146,14 +225,18 @@
                     <a href="#" aria-label="WhatsApp">
                         <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                             <path d="M12 3.3a8.7 8.7 0 0 0-7.5 13.1L3.2 21l4.8-1.3A8.7 8.7 0 1 0 12 3.3z"></path>
-                            <path d="M9.3 8.7c.2-.4.4-.4.7-.4h.5c.1 0 .3.1.4.3l.9 2.1c.1.2.1.4 0 .5l-.4.7c-.1.1-.1.3 0 .4.3.6 1 1.6 2.3 2.2.2.1.3.1.4 0l.8-.9c.1-.1.3-.2.5-.1l2 .9c.2.1.3.2.3.4v.5c0 .3-.1.5-.4.7-.4.2-1 .5-1.9.3-.8-.2-1.7-.6-2.8-1.6-1.2-1-2-2.2-2.3-3-.3-.9 0-1.6.2-2z"></path>
+                            <path
+                                d="M9.3 8.7c.2-.4.4-.4.7-.4h.5c.1 0 .3.1.4.3l.9 2.1c.1.2.1.4 0 .5l-.4.7c-.1.1-.1.3 0 .4.3.6 1 1.6 2.3 2.2.2.1.3.1.4 0l.8-.9c.1-.1.3-.2.5-.1l2 .9c.2.1.3.2.3.4v.5c0 .3-.1.5-.4.7-.4.2-1 .5-1.9.3-.8-.2-1.7-.6-2.8-1.6-1.2-1-2-2.2-2.3-3-.3-.9 0-1.6.2-2z">
+                            </path>
                         </svg>
                     </a>
                     <a href="#" aria-label="LinkedIn">
                         <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                             <rect x="3.4" y="8.3" width="4.1" height="12.3"></rect>
                             <path d="M5.4 3.7a2.3 2.3 0 1 1 0 4.6 2.3 2.3 0 0 1 0-4.6z"></path>
-                            <path d="M10.2 8.3h3.9V10h.1c.5-1 1.8-2 3.9-2 4.2 0 5 2.8 5 6.3v6.3h-4.1v-5.6c0-1.3 0-3-1.9-3-1.9 0-2.1 1.5-2.1 2.9v5.8h-4.8z"></path>
+                            <path
+                                d="M10.2 8.3h3.9V10h.1c.5-1 1.8-2 3.9-2 4.2 0 5 2.8 5 6.3v6.3h-4.1v-5.6c0-1.3 0-3-1.9-3-1.9 0-2.1 1.5-2.1 2.9v5.8h-4.8z">
+                            </path>
                         </svg>
                     </a>
                 </div>
@@ -161,9 +244,10 @@
 
             <div class="footer-column">
                 <h4>Navegação</h4>
-                <a href="#inicio">Início</a>
-                <a href="#inicio">Quem somos</a>
-                <a href="#inicio">Projetos</a>
+                <a href="#">Início</a>
+                <a href="#portfolio">Portfólio</a>
+                <a href="#">Sobre</a>
+                <a href="#processo">Processo</a>
                 <a href="#contato">Contato</a>
             </div>
 
