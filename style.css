@@ -1324,7 +1324,7 @@ text-transform: uppercase;
     right: 22px;
     bottom: 22px;
     width: 55px;
-    height: 55px;
+    height: px;
     border-radius: 999px;
       background: linear-gradient(180deg, #2be470 0%, #1db954 100%);
     color: #ffffff;
@@ -1892,11 +1892,13 @@ text-transform: uppercase;
         bottom: 14px;
         width: 52px;
         height: 52px;
+        
     }
 
     .whatsapp-float svg {
-        width: 27px;
-        height: 27px;
+        width: 45px;
+        height: 45px;
+        right: 15px;
     }
 
 }
