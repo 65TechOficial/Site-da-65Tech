@@ -6,7 +6,6 @@ const contactFeedback = document.getElementById("contactFeedback");
 const sendMessageButton = document.getElementById("sendMessageButton");
 const budgetButton = document.getElementById("budgetButton");
 const budgetButtonMobile = document.getElementById("budgetButtonMobile");
-const buttonMensage = document.getElementById("ButonMensage");
 const heroHighlightsCta = document.getElementById("heroHighlightsCta");
 const heroInjetCta = document.getElementById("heroInjetCta");
 const langToggle = document.getElementById("langToggle");
@@ -425,7 +424,7 @@ function openBudgetWhatsapp() {
 	window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 }
 
-[budgetButton, budgetButtonMobile, buttonMensage, heroHighlightsCta, heroInjetCta].forEach((button) => {
+[budgetButton, budgetButtonMobile, heroHighlightsCta, heroInjetCta].forEach((button) => {
 	if (button) {
 		button.addEventListener("click", openBudgetWhatsapp);
 	}
