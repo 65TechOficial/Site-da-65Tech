@@ -1,83 +1,255 @@
-const projects = [
-	{
-		title: "Injet Nobre",
-		category: "Site institucional para clinica especializada",
-		description: "Apresentação digital voltada para clínicas e consultórios, com foco em autoridade médica, clareza de serviços e contato rápido para novos pacientes.",
-		image: "./assets/Mockups Injet Nobre.png",
-		imageAlt: "Preview do projeto Injet Nobre",
-		link: "https://gabriel100-pro.github.io/Site-oficial-InjetNobre/"
-	},
-	{
-		title: "Mikaela Estética",
-		category: "Site institucional para profissional de estética",
-		description: "Apresentação digital elegante para destacar serviços, autoridade e contato rápido, com foco em uma experiência limpa e profissional para clientes.",
-		image: "./assets/Mikaela Estética.png",
-		imageAlt: "Preview do projeto Mikaela Estética",
-		link: "https://gabriel100-pro.github.io/Mikaela-Est-tica/"
-	},
-	{
-		title: "Agendamento",
-		category: "Agenda online para profissionais de saude",
-		description: "Experiencia de marcacao de consultas com foco em praticidade para pacientes e melhor organizacao de horarios para equipes de atendimento.",
-		image: "./assets/Mosckup Agendamento.png",
-		imageAlt: "Preview do projeto Agendamento",
-		link: "https://gabriel100-pro.github.io/Projeto-de-Agendamento/"
-	}
-];
-
-let currentProject = 0;
-
-const titleEl = document.getElementById("projectTitle");
-const categoryEl = document.getElementById("projectCategory");
-const descriptionEl = document.getElementById("projectDescription");
-const previewEl = document.getElementById("projectPreview");
-const linkEl = document.getElementById("projectLink");
-const nextButton = document.getElementById("projectNext");
-const dotsContainer = document.getElementById("projectDots");
-const viewProjectsButton = document.getElementById("viewProjectsButton");
-const portfolioSection = document.getElementById("portfolio");
-
-function renderProject(index) {
-	const project = projects[index];
-
-	titleEl.textContent = project.title;
-	categoryEl.textContent = project.category;
-	descriptionEl.textContent = project.description;
-	previewEl.innerHTML = `<img src="${project.image}" alt="${project.imageAlt}">`;
-	linkEl.setAttribute("href", project.link);
-	linkEl.setAttribute("target", "_blank");
-	linkEl.setAttribute("rel", "noopener noreferrer");
-
-	const dots = dotsContainer.querySelectorAll("span");
-	dots.forEach((dot, dotIndex) => {
-		dot.classList.toggle("active", dotIndex === index);
-	});
-}
-
-if (nextButton) {
-	nextButton.addEventListener("click", () => {
-		currentProject = (currentProject + 1) % projects.length;
-		renderProject(currentProject);
-	});
-
-	renderProject(currentProject);
-}
-
-if (viewProjectsButton && portfolioSection) {
-	viewProjectsButton.addEventListener("click", () => {
-		const headerOffset = header ? header.offsetHeight + 10 : 0;
-		const targetTop = portfolioSection.getBoundingClientRect().top + window.scrollY - headerOffset;
-
-		window.scrollTo({
-			top: targetTop,
-			behavior: "smooth"
-		});
-	});
-}
-
 const header = document.querySelector("header");
 const menuToggle = document.getElementById("menuToggle");
 const siteNav = document.getElementById("siteNav");
+const contactForm = document.getElementById("contactForm");
+const contactFeedback = document.getElementById("contactFeedback");
+const sendMessageButton = document.getElementById("sendMessageButton");
+const budgetButton = document.getElementById("budgetButton");
+const budgetButtonMobile = document.getElementById("budgetButtonMobile");
+const heroHighlightsCta = document.getElementById("heroHighlightsCta");
+const heroInjetCta = document.getElementById("heroInjetCta");
+const langToggle = document.getElementById("langToggle");
+const langMenu = document.getElementById("langMenu");
+const langSwitcher = langToggle ? langToggle.closest(".lang-switcher") : null;
+const langOptions = document.querySelectorAll(".lang-option");
+
+const translations = {
+	pt: {
+		langLabel: "PT",
+		nav: {
+			home: "Inicio",
+			about: "Quem somos",
+			solutions: "Soluções",
+			cases: "Cases",
+			testimonials: "Depoimentos",
+			contact: "Contato"
+		},
+		hero: {
+			title: "Criamos <span>sites impactantes</span> com experiência visual que aumenta conversões.",
+			subtitle: "Unimos design, estratégia e tecnologia para negócios que querem transmitir autoridade e fechar mais clientes no digital.",
+			ctaPrimary: "Iniciar Meu Projeto",
+			ctaSecondary: "Ver Projetos",
+			point1: "Design autoral",
+			point2: "Alta performance",
+			point3: "Foco em resultado",
+			highlight1: "Elevamos a experiência do usuário em outro nível",
+			highlight2: "Entregamos layouts elegantes e envolventes",
+			highlight3: "Com telas personalizadas para cada objetivo",
+			highlightCta: "Descubra como criar sites mais atrativos"
+		},
+		exp: {
+			title: "CRIAMOS <span>EXPERIÊNCIAS DIGITAIS</span>",
+			p1: "Projetando interfaces interativas através de conteúdos atrativos que alavancam sua captação de leads e conversões.",
+			p2: "Nossos sites são pensados em cada detalhe para proporcionar uma experiência única, inserindo cada foto, botão e ícone no local exato onde irão converter.",
+			p3: "Tudo isso sem deixar de lado o rankeamento nas plataformas de pesquisa e oferecendo uma navegação rápida, intuitiva, focada na experiência do usuário."
+		},
+		injet: {
+			topCta: "Construa seu site agora",
+			caption: "RECEBA MAIS CONTATOS ATRAVÉS DE UM <span>SITE PLANEJADO PARA GERAR CONVERSÕES</span>"
+		},
+		cards: {
+			ux: {
+				title: "UX DESIGN",
+				p1: "Desenvolvemos interfaces incríveis pensando em cada detalhe para proporcionar a sua marca uma plataforma moderna e eficiente, capaz de encantar e atrair mais resultados.",
+				p2: "Para isso, disponibilizamos ferramentas completas com mapas de calor, filmagens de ações de clientes e métricas de acessos, regiões e perfil para orientar sua tomada de decisões.",
+				cta: "SOLICITE SEU SITE INTELIGENTE"
+			},
+			layout: {
+				title: "LAYOUT DO SITE",
+				p1: "Oferecemos as principais tendências para que sua marca tenha um site que se destaque entre os concorrentes, com combinações de cores modernas que transmitam a sua essência.",
+				p2: "Estaremos lado a lado para transformar seu briefing dos sonhos em um projeto real e acima da sua expectativa, independentemente da quantidade de edições que você precisar.",
+				cta: "CONSTRUA SEU FUNIL COM UM ESPECIALISTA"
+			},
+			content: {
+				title: "CONTEÚDO DO SITE",
+				p1: "Vamos além do básico para criar e colocar, em cada tela, a descrição perfeita dos seus serviços, orientando o usuário com clareza para a decisão certa.",
+				p2: "Todo texto é planejado para comunicar valor, gerar confiança e fortalecer o posicionamento da sua marca ao longo da jornada de compra.",
+				cta: "TENHA CONTEÚDO QUE CONVERTE"
+			},
+			code: {
+				title: "PROGRAMAÇÃO",
+				p1: "Transformamos ideias em projetos reais, trabalhando em cada código para oferecer uma experiência atrativa em todas as plataformas.",
+				p2: "Criamos uma estrutura rápida, segura e preparada para crescer, garantindo estabilidade e performance para o seu negócio.",
+				cta: "QUERO UM SITE DE ALTA PERFORMANCE"
+			}
+		}
+	},
+	en: {
+		langLabel: "EN",
+		nav: {
+			home: "Home",
+			about: "About",
+			solutions: "Solutions",
+			cases: "Cases",
+			testimonials: "Testimonials",
+			contact: "Contact"
+		},
+		hero: {
+			title: "We create <span>impactful websites</span> with visual experiences that increase conversions.",
+			subtitle: "We combine design, strategy, and technology for brands that want to communicate authority and close more clients online.",
+			ctaPrimary: "Start My Project",
+			ctaSecondary: "See Projects",
+			point1: "Signature design",
+			point2: "High performance",
+			point3: "Results-driven",
+			highlight1: "We elevate user experience to another level",
+			highlight2: "We deliver elegant and immersive layouts",
+			highlight3: "With custom screens for each goal",
+			highlightCta: "Learn how to create more attractive websites"
+		},
+		exp: {
+			title: "WE CREATE <span>DIGITAL EXPERIENCES</span>",
+			p1: "We design interactive interfaces with engaging content that boosts lead generation and conversions.",
+			p2: "Every detail is crafted to deliver a unique experience, placing each photo, button, and icon exactly where users convert.",
+			p3: "All of this while maintaining search ranking and offering fast, intuitive navigation focused on user experience."
+		},
+		injet: {
+			topCta: "Build your website now",
+			caption: "GET MORE LEADS THROUGH A <span>WEBSITE BUILT TO CONVERT</span>"
+		},
+		cards: {
+			ux: {
+				title: "UX DESIGN",
+				p1: "We build outstanding interfaces with attention to detail, giving your brand a modern and efficient platform that attracts better results.",
+				p2: "We provide complete tools like heatmaps, user session recordings, and traffic metrics to guide your decision-making.",
+				cta: "REQUEST YOUR SMART WEBSITE"
+			},
+			layout: {
+				title: "WEBSITE LAYOUT",
+				p1: "We apply top trends so your brand stands out with modern color combinations that communicate your essence.",
+				p2: "We work side by side to turn your dream briefing into a real project beyond expectations, regardless of edit rounds.",
+				cta: "BUILD YOUR FUNNEL WITH A SPECIALIST"
+			},
+			content: {
+				title: "WEBSITE CONTENT",
+				p1: "We go beyond basics to craft each screen with the right service descriptions, guiding users clearly to the right decision.",
+				p2: "Every line is planned to communicate value, build trust, and strengthen your brand throughout the customer journey.",
+				cta: "GET CONTENT THAT CONVERTS"
+			},
+			code: {
+				title: "DEVELOPMENT",
+				p1: "We turn ideas into real projects, crafting each line of code to deliver a compelling experience on every platform.",
+				p2: "We build a fast, secure, and scalable structure that ensures stability and performance for your business.",
+				cta: "I WANT A HIGH-PERFORMANCE WEBSITE"
+			}
+		}
+	},
+	es: {
+		langLabel: "ES",
+		nav: {
+			home: "Inicio",
+			about: "Quiénes somos",
+			solutions: "Soluciones",
+			cases: "Casos",
+			testimonials: "Testimonios",
+			contact: "Contacto"
+		},
+		hero: {
+			title: "Creamos <span>sitios impactantes</span> con experiencias visuales que aumentan conversiones.",
+			subtitle: "Unimos diseño, estrategia y tecnología para marcas que desean transmitir autoridad y cerrar más clientes en digital.",
+			ctaPrimary: "Iniciar mi proyecto",
+			ctaSecondary: "Ver proyectos",
+			point1: "Diseño de autor",
+			point2: "Alto rendimiento",
+			point3: "Enfoque en resultados",
+			highlight1: "Llevamos la experiencia del usuario a otro nivel",
+			highlight2: "Entregamos layouts elegantes y envolventes",
+			highlight3: "Con pantallas personalizadas para cada objetivo",
+			highlightCta: "Descubre cómo crear sitios más atractivos"
+		},
+		exp: {
+			title: "CREAMOS <span>EXPERIENCIAS DIGITALES</span>",
+			p1: "Diseñamos interfaces interactivas con contenidos atractivos que impulsan la captación de leads y conversiones.",
+			p2: "Cada detalle está pensado para ofrecer una experiencia única, ubicando fotos, botones e íconos donde realmente convierten.",
+			p3: "Todo esto sin dejar de lado el posicionamiento en buscadores y con navegación rápida e intuitiva centrada en el usuario."
+		},
+		injet: {
+			topCta: "Construye tu sitio ahora",
+			caption: "RECIBE MÁS CONTACTOS CON UN <span>SITIO PLANEADO PARA GENERAR CONVERSIONES</span>"
+		},
+		cards: {
+			ux: {
+				title: "UX DESIGN",
+				p1: "Desarrollamos interfaces increíbles cuidando cada detalle para brindar una plataforma moderna y eficiente que atraiga más resultados.",
+				p2: "Ofrecemos herramientas completas como mapas de calor, grabaciones de sesiones y métricas para guiar tus decisiones.",
+				cta: "SOLICITA TU SITIO INTELIGENTE"
+			},
+			layout: {
+				title: "LAYOUT DEL SITIO",
+				p1: "Aplicamos tendencias para que tu marca destaque con combinaciones modernas que transmitan su esencia.",
+				p2: "Trabajamos contigo para convertir tu briefing en un proyecto real y superior a tus expectativas.",
+				cta: "CONSTRUYE TU EMBUDO CON UN ESPECIALISTA"
+			},
+			content: {
+				title: "CONTENIDO DEL SITIO",
+				p1: "Vamos más allá de lo básico para crear textos claros que ayuden al usuario a entender y decidir mejor.",
+				p2: "Cada palabra comunica valor, genera confianza y fortalece el posicionamiento de tu marca.",
+				cta: "TEN CONTENIDO QUE CONVIERTE"
+			},
+			code: {
+				title: "PROGRAMACIÓN",
+				p1: "Transformamos ideas en proyectos reales, trabajando cada línea de código para crear experiencias atractivas.",
+				p2: "Desarrollamos una estructura rápida, segura y escalable para garantizar estabilidad y rendimiento.",
+				cta: "QUIERO UN SITIO DE ALTO RENDIMIENTO"
+			}
+		}
+	}
+};
+
+function getTranslationByKey(obj, keyPath) {
+	return keyPath.split(".").reduce((acc, part) => (acc ? acc[part] : undefined), obj);
+}
+
+function applyLanguage(lang) {
+	const locale = translations[lang] ? lang : "pt";
+	const dict = translations[locale];
+	document.documentElement.lang = locale;
+
+	if (langToggle) {
+		langToggle.innerHTML = `${dict.langLabel} <span aria-hidden="true">˅</span>`;
+	}
+
+	langOptions.forEach((option) => {
+		option.classList.toggle("active", option.dataset.lang === locale);
+	});
+
+	document.querySelectorAll("[data-i18n]").forEach((element) => {
+		const key = element.getAttribute("data-i18n");
+		const translatedValue = getTranslationByKey(dict, key);
+
+		if (!translatedValue) {
+			return;
+		}
+
+		element.innerHTML = translatedValue;
+	});
+
+	localStorage.setItem("siteLanguage", locale);
+}
+
+if (langToggle && langMenu && langSwitcher) {
+	langToggle.addEventListener("click", () => {
+		const isOpen = langSwitcher.classList.toggle("open");
+		langToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+	});
+
+	langOptions.forEach((option) => {
+		option.addEventListener("click", () => {
+			applyLanguage(option.dataset.lang || "pt");
+			langSwitcher.classList.remove("open");
+			langToggle.setAttribute("aria-expanded", "false");
+		});
+	});
+
+	document.addEventListener("click", (event) => {
+		if (!langSwitcher.contains(event.target)) {
+			langSwitcher.classList.remove("open");
+			langToggle.setAttribute("aria-expanded", "false");
+		}
+	});
+}
+
+applyLanguage(localStorage.getItem("siteLanguage") || "pt");
 
 function handleHeaderScroll() {
 	if (!header) {
@@ -131,195 +303,6 @@ if (menuToggle && header && siteNav) {
 		}
 	});
 }
-
-const testimonials = [
-	{
-		name: "Dra. Mariana Silva",
-		specialty: "Dermatologista",
-		quote: "O sistema da 65Tech triplicou nossos agendamentos online e deixou o atendimento muito mais fluido.",
-		image: "./assets/Dra Adriana Guedes.jpg",
-		imageAlt: "Dra. Mariana Silva, dermatologista"
-	},
-	{
-		name: "Dr. Renato Alves",
-		specialty: "Cardiologista",
-		quote: "Conseguimos organizar consultas e retornos com mais rapidez e reduzir as faltas em agenda.",
-		image: "./assets/Dra Adriano Moraes.jpg",
-		imageAlt: "Dr. Renato Alves, cardiologista"
-	},
-	{
-		name: "Dra. Fernanda Costa",
-		specialty: "Pediatra",
-		quote: "A experiência digital ficou mais profissional e nossos pacientes passaram a confiar mais no processo de agendamento.",
-		image: "./assets/Dra Fernanda Lopes.jpg",
-		imageAlt: "Dra. Fernanda Costa, pediatra"
-	}
-];
-
-let currentTestimonial = 0;
-
-const testimonialImageEl = document.getElementById("testimonialImage");
-const testimonialNameEl = document.getElementById("testimonialName");
-const testimonialSpecialtyEl = document.getElementById("testimonialSpecialty");
-const testimonialQuoteEl = document.getElementById("testimonialQuote");
-const testimonialPrevButton = document.getElementById("testimonialPrev");
-const testimonialNextButton = document.getElementById("testimonialNext");
-const testimonialDotsContainer = document.getElementById("testimonialDots");
-
-function renderTestimonial(index) {
-	const testimonial = testimonials[index];
-
-	testimonialImageEl.setAttribute("src", testimonial.image);
-	testimonialImageEl.setAttribute("alt", testimonial.imageAlt);
-	testimonialNameEl.textContent = testimonial.name;
-	testimonialSpecialtyEl.textContent = testimonial.specialty;
-	testimonialQuoteEl.textContent = testimonial.quote;
-
-	const dots = testimonialDotsContainer.querySelectorAll("span");
-	dots.forEach((dot, dotIndex) => {
-		dot.classList.toggle("active", dotIndex === index);
-	});
-}
-
-if (testimonialPrevButton && testimonialNextButton) {
-	testimonialPrevButton.addEventListener("click", () => {
-		currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-		renderTestimonial(currentTestimonial);
-	});
-
-	testimonialNextButton.addEventListener("click", () => {
-		currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-		renderTestimonial(currentTestimonial);
-	});
-
-	renderTestimonial(currentTestimonial);
-}
-
-const workflowTrack = document.getElementById("workflowTrack");
-const workflowSteps = document.querySelectorAll(".workflow-step");
-const workflowSection = document.querySelector(".workflow-section");
-
-function setWorkflowStep(activeIndex) {
-	if (!workflowTrack || workflowSteps.length === 0) {
-		return;
-	}
-
-	workflowSteps.forEach((step, index) => {
-		step.classList.toggle("active", index <= activeIndex);
-	});
-
-	const maxIndex = workflowSteps.length - 1;
-	const progressPercent = maxIndex > 0 ? (activeIndex / maxIndex) * 100 : 0;
-	workflowTrack.style.setProperty("--workflow-progress", `${progressPercent}%`);
-}
-
-if (workflowSteps.length > 0) {
-	workflowSteps.forEach((step, index) => {
-		step.style.setProperty("--stagger", `${index}`);
-	});
-
-	workflowSteps.forEach((step, index) => {
-		step.addEventListener("click", () => setWorkflowStep(index));
-	});
-
-	setWorkflowStep(0);
-}
-
-if (workflowSection) {
-	const revealWorkflow = () => workflowSection.classList.add("is-visible");
-
-	if ("IntersectionObserver" in window) {
-		const workflowObserver = new IntersectionObserver((entries, observer) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					revealWorkflow();
-					observer.disconnect();
-				}
-			});
-		}, { threshold: 0.28 });
-
-		workflowObserver.observe(workflowSection);
-	} else {
-		revealWorkflow();
-	}
-}
-
-const serviceIcons = {
-	institucional: `
-		<svg viewBox="0 0 24 24" role="img" aria-label="Sites Institucionais">
-			<path d="M4 20h16" />
-			<path d="M6 20V9l6-4 6 4v11" />
-			<path d="M10 20v-5h4v5" />
-			<path d="M9 11h.01" />
-			<path d="M15 11h.01" />
-		</svg>
-	`,
-	landing: `
-		<svg viewBox="0 0 24 24" role="img" aria-label="Landing Pages">
-			<path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
-			<path d="M8 9h8" />
-			<path d="M8 12h6" />
-			<path d="M9 16h2" />
-		</svg>
-	`,
-	loja: `
-		<svg viewBox="0 0 24 24" role="img" aria-label="Lojas Virtuais">
-			<path d="M7 7V6a5 5 0 0 1 10 0v1" />
-			<path d="M6 8h12l1 12H5L6 8z" />
-			<path d="M9 11h.01" />
-			<path d="M15 11h.01" />
-			<path d="M9 15h6" />
-		</svg>
-	`,
-	mobile: `
-		<svg viewBox="0 0 24 24" role="img" aria-label="Otimização Mobile">
-			<path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
-			<path d="M9 6h6" />
-			<path d="M10 18h4" />
-			<path d="M10 14h4" />
-		</svg>
-	`,
-	seo: `
-		<svg viewBox="0 0 24 24" role="img" aria-label="SEO Básico">
-			<path d="M4 19h16" />
-			<path d="M7 15 11 11l3 3 4-5" />
-			<path d="M17 8h2v2" />
-			<path d="M6 14 7 15" />
-		</svg>
-	`,
-	manutencao: `
-		<svg viewBox="0 0 24 24" role="img" aria-label="Manutenção">
-			<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-3 3-2-2 3-3z" />
-			<path d="M15.2 10.8 13.5 9.1" />
-		</svg>
-	`
-};
-
-function applyServiceIcons() {
-	const cards = document.querySelectorAll("[data-service-card]");
-
-	cards.forEach((card) => {
-		const serviceName = card.getAttribute("data-service-card");
-		const iconWrapper = card.querySelector(".service-icon");
-		const iconMarkup = serviceIcons[serviceName];
-
-		if (!iconWrapper || !iconMarkup) {
-			return;
-		}
-
-		iconWrapper.innerHTML = iconMarkup.trim();
-	});
-}
-
-applyServiceIcons();
-
-const contactForm = document.getElementById("contactForm");
-const contactFeedback = document.getElementById("contactFeedback");
-const sendMessageButton = document.getElementById("sendMessageButton");
-const budgetButton = document.getElementById("budgetButton");
-const budgetButtonMobile = document.getElementById("budgetButtonMobile");
-const ButtonMensage = document.getElementById("ButonMensage");
-
 
 function getContactsApiBase() {
 	const savedApiBase = localStorage.getItem("contactsApiBase");
@@ -441,7 +424,7 @@ function openBudgetWhatsapp() {
 	window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 }
 
-[budgetButton, budgetButtonMobile, ButtonMensage].forEach((button) => {
+[budgetButton, budgetButtonMobile, heroHighlightsCta, heroInjetCta].forEach((button) => {
 	if (button) {
 		button.addEventListener("click", openBudgetWhatsapp);
 	}
