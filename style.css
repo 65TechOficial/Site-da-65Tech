@@ -118,6 +118,24 @@ header a {
     font-weight: 700;
 }
 
+.brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.brand-logo {
+    display: block;
+    height: 90px;
+    width: 150px;
+    object-fit: contain;
+}
+
+header.scrolled .brand-logo {
+    height: 28px;
+}
+
 
 
 header.scrolled {
@@ -333,6 +351,7 @@ header.menu-open .menu-toggle svg path:nth-child(3) {
     color: #f8f9fb;
     text-transform: uppercase;
     max-width: 43ch;
+    margin-top: 25px;
 }
 
 .hero-copy h1 span {
@@ -363,6 +382,7 @@ header.menu-open .menu-toggle svg path:nth-child(3) {
     min-width: 0;
     position: relative;
     overflow: visible;
+    margin-top: -20px;
 }
 
 .hero-portfolio-image {
@@ -1306,7 +1326,6 @@ text-transform: uppercase;
 
     .brand {
         margin-right: 16px;
-        font-size: clamp(24px, 3.2vw, 38px);
     }
 
     header nav {
@@ -1488,7 +1507,6 @@ text-transform: uppercase;
 
     .brand {
         margin-right: 0;
-        font-size: clamp(34px, 11vw, 42px);
     }
 
     #budgetButton {
