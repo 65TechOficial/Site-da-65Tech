@@ -1101,10 +1101,14 @@ text-transform: uppercase;
 .packages-heading p {
     margin: 0 auto;
     max-width: 760px;
-    color: #c3d0f8;
-    font-family: 'Inter', sans-serif;
+   
+    
     font-size: 18px;
+    
+    font-family: Inter, Poppins, system-ui, sans-serif;
+    font-size: clamp(0.97rem, 1.2vw, 1.08rem);
     line-height: 1.65;
+    color: rgba(229, 231, 235, 0.78);
 }
 
 .packages-grid {
@@ -1200,6 +1204,7 @@ text-transform: uppercase;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     line-height: 1.7;
+    
 }
 
 .package-card ul {
@@ -2127,4 +2132,310 @@ text-transform: uppercase;
         right: 15px;
     }
 
+}
+
+/* ===== QUEM SOMOS ===== */
+
+.about-65tech {
+    width: 100%;
+    padding: clamp(72px, 8vw, 112px) clamp(16px, 4vw, 42px);
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-65tech__container {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+}
+
+.about-65tech__heading {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.about-65tech__heading .section-h2 {
+    margin: 0 0 12px;
+    font-size: clamp(30px, 3.3vw, 40px);
+}
+
+.about-65tech__heading p {
+    margin: 0;
+    max-width: 100%;
+    color: rgba(229, 231, 235, 0.84);
+    font-family: Inter, Poppins, system-ui, sans-serif;
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.65;
+}
+
+.about-65tech__content {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(340px, 1.25fr);
+    gap: clamp(24px, 3.2vw, 40px);
+    align-items: stretch;
+}
+
+.about-65tech__placeholder {
+    border-radius: 24px;
+    border: 1px dashed rgba(159, 178, 253, 0.42);
+    background: #000;
+    min-height: clamp(290px, 34vw, 420px);
+    display: grid;
+    place-items: center;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 34px rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(6px);
+}
+
+.about-65tech__placeholder span {
+    color: rgba(207, 216, 254, 0.86);
+    text-align: center;
+    padding: 0 18px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: clamp(0.82rem, 1.1vw, 0.94rem);
+    font-family: Inter, Poppins, system-ui, sans-serif;
+}
+
+.about-65tech__info {
+    display: grid;
+    gap: 24px;
+    align-content: start;
+}
+
+.about-65tech__institutional {
+    margin: 0;
+    color: rgba(240, 244, 255, 0.9);
+    font-family: Inter, Poppins, system-ui, sans-serif;
+    font-size: clamp(0.98rem, 1.2vw, 1.06rem);
+    line-height: 1.75;
+}
+
+.about-65tech__cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(210px, 1fr));
+    gap: 22px;
+}
+
+.about-65tech__card {
+    border-radius: 18px;
+    padding: 18px 16px;
+    border: 1px solid rgba(134, 239, 172, 0.42);
+    background: #000;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(7px);
+    transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.about-65tech__card:hover {
+    transform: scale(1.03);
+    border-color: rgba(134, 239, 172, 0.78);
+    box-shadow: 0 20px 34px rgba(0, 0, 0, 0.36), 0 0 20px rgba(134, 239, 172, 0.16);
+}
+
+.about-65tech__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    font-size: 1.15rem;
+    background: rgba(63, 102, 251, 0.2);
+    border: 1px solid rgba(159, 178, 253, 0.34);
+}
+
+.about-65tech__card h3 {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-family: Inter, Poppins, system-ui, sans-serif;
+    font-size: 1.03rem;
+    line-height: 1.25;
+}
+
+.about-65tech__card p {
+    margin: 0;
+    color: rgba(214, 223, 245, 0.9);
+    font-family: Inter, Poppins, system-ui, sans-serif;
+    font-size: 0.93rem;
+    line-height: 1.6;
+}
+
+/* Entrance states for About section */
+.about-65tech__heading .section-h2,
+.about-65tech__heading p,
+.about-65tech__institutional,
+.about-65tech__placeholder,
+.about-65tech__card {
+    opacity: 0;
+    transition-property: opacity, transform, box-shadow, border-color, filter;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, box-shadow, border-color, filter;
+}
+
+.about-65tech__content {
+    perspective: 1200px;
+}
+
+.about-65tech__heading .section-h2,
+.about-65tech__heading p,
+.about-65tech__institutional {
+    transform: translateY(24px);
+}
+
+.about-65tech__placeholder {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transform: translateX(-28px) scale(0.95) rotateX(var(--panel-rotate-x, 0deg)) rotateY(var(--panel-rotate-y, 0deg)) translate3d(var(--panel-shift-x, 0px), var(--panel-shift-y, 0px), 0);
+    transform-origin: center;
+    --panel-rotate-x: 0deg;
+    --panel-rotate-y: 0deg;
+    --panel-shift-x: 0px;
+    --panel-shift-y: 0px;
+    --panel-scale: 1;
+    --panel-glow-x: 50%;
+    --panel-glow-y: 50%;
+    --panel-glow-opacity: 0;
+}
+
+.about-65tech__card {
+    transform: translate3d(0, var(--card-shift-y, 22px), 0) scale(var(--card-scale, 0.97)) rotateX(var(--card-rotate-x, 0deg)) rotateY(var(--card-rotate-y, 0deg));
+    transform-origin: center;
+    --card-shift-y: 22px;
+    --card-scale: 0.97;
+    --card-rotate-x: 0deg;
+    --card-rotate-y: 0deg;
+}
+
+.about-65tech__heading .section-h2.is-visible,
+.about-65tech__heading p.is-visible,
+.about-65tech__institutional.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about-65tech__placeholder.is-visible {
+    opacity: 1;
+    transform: translateX(0) scale(var(--panel-scale, 1)) rotateX(var(--panel-rotate-x, 0deg)) rotateY(var(--panel-rotate-y, 0deg)) translate3d(var(--panel-shift-x, 0px), var(--panel-shift-y, 0px), 0);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 34px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(34, 197, 94, 0.06), 0 0 24px rgba(34, 197, 94, 0.08);
+    transition-duration: 980ms;
+}
+
+.about-65tech__card.is-visible {
+    opacity: 1;
+    transform: translate3d(0, var(--card-shift-y, 0px), 0) scale(var(--card-scale, 1)) rotateX(var(--card-rotate-x, 0deg)) rotateY(var(--card-rotate-y, 0deg));
+    transition-duration: 760ms;
+}
+
+/* Keep hover smooth after reveal */
+.about-65tech__card {
+    transition-property: opacity, transform, box-shadow, border-color, filter;
+}
+
+.about-65tech--interactive .about-65tech__placeholder {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 34px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(34, 197, 94, 0.08), 0 0 28px rgba(34, 197, 94, 0.08);
+}
+
+.about-65tech--interactive .about-65tech__placeholder::before,
+.about-65tech--interactive .about-65tech__placeholder::after {
+    content: "";
+    position: absolute;
+    inset: -18%;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.about-65tech--interactive .about-65tech__placeholder::before {
+    background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.14), transparent 58%);
+    filter: blur(10px);
+    opacity: 0.55;
+    animation: aboutAmbientBreath 7.5s ease-in-out infinite alternate;
+}
+
+.about-65tech--interactive .about-65tech__placeholder::after {
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--panel-glow-x, 50%) var(--panel-glow-y, 50%),
+        rgba(34, 197, 94, 0.18) 0%,
+        rgba(34, 197, 94, 0.08) 18%,
+        rgba(34, 197, 94, 0.03) 35%,
+        transparent 66%
+    );
+    opacity: var(--panel-glow-opacity, 0);
+    transition: opacity 260ms ease;
+}
+
+.about-65tech--interactive .about-65tech__placeholder.is-hovered {
+    --panel-scale: 1.02;
+    --panel-glow-opacity: 1;
+}
+
+.about-65tech__card.is-hovered {
+    --card-shift-y: -8px;
+    --card-scale: 1.02;
+    border-color: rgba(134, 239, 172, 0.84);
+    box-shadow: 0 20px 34px rgba(0, 0, 0, 0.42), 0 0 28px rgba(34, 197, 94, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.about-65tech__card.is-hovered .about-65tech__icon {
+    transform: scale(1.08) rotate(6deg);
+    filter: drop-shadow(0 0 12px rgba(34, 197, 94, 0.12));
+}
+
+.about-65tech__card .about-65tech__icon {
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), filter 280ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, filter;
+}
+
+@keyframes aboutAmbientBreath {
+    from {
+        transform: scale(0.96);
+        opacity: 0.42;
+    }
+
+    to {
+        transform: scale(1.04);
+        opacity: 0.62;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-65tech__heading .section-h2,
+    .about-65tech__heading p,
+    .about-65tech__institutional,
+    .about-65tech__placeholder,
+    .about-65tech__card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .about-65tech--interactive .about-65tech__placeholder::before {
+        animation: none;
+    }
+}
+
+@media (max-width: 980px) {
+    .about-65tech__content {
+        grid-template-columns: 1fr;
+    }
+
+    .about-65tech__placeholder {
+        min-height: clamp(250px, 40vw, 330px);
+    }
+}
+
+@media (max-width: 640px) {
+    .about-65tech {
+        padding: 62px 14px 74px;
+    }
+
+    .about-65tech__cards {
+        grid-template-columns: 1fr;
+    }
+
+    .about-65tech__card {
+        padding: 16px 14px;
+    }
 }

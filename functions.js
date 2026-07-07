@@ -429,3 +429,265 @@ function openBudgetWhatsapp() {
 		button.addEventListener("click", openBudgetWhatsapp);
 	}
 });
+
+function wait(ms) {
+	return new Promise((resolve) => {
+		window.setTimeout(resolve, ms);
+	});
+}
+
+function revealElement(element) {
+	if (element) {
+		element.classList.add("is-visible");
+	}
+}
+
+function revealCardsSequentially(cards) {
+	return cards.reduce((chain, card) => {
+		return chain.then(() => {
+			revealElement(card);
+			return wait(280);
+		});
+	}, Promise.resolve());
+}
+
+function clamp(value, min, max) {
+	return Math.min(Math.max(value, min), max);
+}
+
+function initAboutSectionInteractions() {
+	const aboutSection = document.querySelector(".about-65tech");
+	const aboutPanel = document.querySelector(".about-65tech__placeholder");
+	const aboutCards = Array.from(document.querySelectorAll(".about-65tech__card"));
+
+	if (!aboutSection || !aboutPanel || !aboutCards.length) {
+		return;
+	}
+
+	let isReady = false;
+	let currentFrame = 0;
+	let hoverTarget = null;
+	let pointerX = 0.5;
+	let pointerY = 0.5;
+	let panelRect = null;
+	let activeCard = null;
+
+	const updatePanelGlow = () => {
+		if (!panelRect) {
+			return;
+		}
+
+		const xPercent = `${clamp(pointerX * 100, 0, 100).toFixed(2)}%`;
+		const yPercent = `${clamp(pointerY * 100, 0, 100).toFixed(2)}%`;
+		aboutPanel.style.setProperty("--panel-glow-x", xPercent);
+		aboutPanel.style.setProperty("--panel-glow-y", yPercent);
+		aboutPanel.style.setProperty("--panel-rotate-y", `${((pointerX - 0.5) * 10).toFixed(2)}deg`);
+		aboutPanel.style.setProperty("--panel-rotate-x", `${((-pointerY + 0.5) * 10).toFixed(2)}deg`);
+		aboutPanel.style.setProperty("--panel-shift-x", `${((pointerX - 0.5) * 8).toFixed(2)}px`);
+		aboutPanel.style.setProperty("--panel-shift-y", `${((-pointerY + 0.5) * 8).toFixed(2)}px`);
+	};
+
+	const updateCardTilt = () => {
+		aboutCards.forEach((card) => {
+			const rect = card.getBoundingClientRect();
+			const centerX = rect.left + rect.width / 2;
+			const centerY = rect.top + rect.height / 2;
+			const relativeX = clamp((hoverTarget.x - centerX) / (rect.width / 2), -1, 1);
+			const relativeY = clamp((hoverTarget.y - centerY) / (rect.height / 2), -1, 1);
+			card.style.setProperty("--card-rotate-y", `${(relativeX * 4).toFixed(2)}deg`);
+			card.style.setProperty("--card-rotate-x", `${(-relativeY * 4).toFixed(2)}deg`);
+		});
+	};
+
+	const resetInteractivity = () => {
+		aboutSection.classList.remove("about-65tech--interactive");
+		aboutPanel.classList.remove("is-hovered");
+		aboutPanel.style.setProperty("--panel-rotate-x", "0deg");
+		aboutPanel.style.setProperty("--panel-rotate-y", "0deg");
+		aboutPanel.style.setProperty("--panel-shift-x", "0px");
+		aboutPanel.style.setProperty("--panel-shift-y", "0px");
+		aboutPanel.style.setProperty("--panel-glow-opacity", "0");
+		aboutCards.forEach((card) => {
+			card.classList.remove("is-hovered");
+			card.style.setProperty("--card-rotate-x", "0deg");
+			card.style.setProperty("--card-rotate-y", "0deg");
+			card.style.setProperty("--card-shift-y", "0px");
+			card.style.setProperty("--card-scale", "1");
+		});
+		activeCard = null;
+		panelRect = null;
+	};
+
+	const animate = () => {
+		if (!isReady) {
+			currentFrame = 0;
+			return;
+		}
+
+		if (aboutPanel.classList.contains("is-hovered")) {
+			updatePanelGlow();
+		}
+
+		if (activeCard) {
+			updateCardTilt();
+		}
+
+		currentFrame = window.requestAnimationFrame(animate);
+	};
+
+	const enableInteraction = () => {
+		isReady = true;
+		aboutSection.classList.add("about-65tech--interactive");
+		if (!currentFrame) {
+			currentFrame = window.requestAnimationFrame(animate);
+		}
+	};
+
+	aboutPanel.addEventListener("pointerenter", () => {
+		if (!isReady) {
+			return;
+		}
+
+		panelRect = aboutPanel.getBoundingClientRect();
+		aboutPanel.classList.add("is-hovered");
+		if (!currentFrame) {
+			currentFrame = window.requestAnimationFrame(animate);
+		}
+	});
+
+	aboutPanel.addEventListener("pointermove", (event) => {
+		if (!isReady) {
+			return;
+		}
+
+		panelRect = aboutPanel.getBoundingClientRect();
+		pointerX = panelRect.width ? (event.clientX - panelRect.left) / panelRect.width : 0.5;
+		pointerY = panelRect.height ? (event.clientY - panelRect.top) / panelRect.height : 0.5;
+		if (!currentFrame) {
+			currentFrame = window.requestAnimationFrame(animate);
+		}
+	});
+
+	aboutPanel.addEventListener("pointerleave", () => {
+		if (!isReady) {
+			return;
+		}
+
+		aboutPanel.classList.remove("is-hovered");
+		aboutPanel.style.setProperty("--panel-rotate-x", "0deg");
+		aboutPanel.style.setProperty("--panel-rotate-y", "0deg");
+		aboutPanel.style.setProperty("--panel-shift-x", "0px");
+		aboutPanel.style.setProperty("--panel-shift-y", "0px");
+		aboutPanel.style.setProperty("--panel-glow-opacity", "0");
+	});
+
+	aboutCards.forEach((card) => {
+		card.addEventListener("pointerenter", () => {
+			if (!isReady) {
+				return;
+			}
+
+			activeCard = card;
+			card.classList.add("is-hovered");
+			if (!currentFrame) {
+				currentFrame = window.requestAnimationFrame(animate);
+			}
+		});
+
+		card.addEventListener("pointermove", (event) => {
+			if (!isReady) {
+				return;
+			}
+
+			hoverTarget = { x: event.clientX, y: event.clientY };
+			if (!currentFrame) {
+				currentFrame = window.requestAnimationFrame(animate);
+			}
+		});
+
+		card.addEventListener("pointerleave", () => {
+			if (!isReady) {
+				return;
+			}
+
+			card.classList.remove("is-hovered");
+			card.style.setProperty("--card-rotate-x", "0deg");
+			card.style.setProperty("--card-rotate-y", "0deg");
+			card.style.setProperty("--card-shift-y", "0px");
+			card.style.setProperty("--card-scale", "1");
+			if (activeCard === card) {
+				activeCard = null;
+			}
+		});
+	});
+
+	aboutSection.addEventListener("pointerenter", enableInteraction);
+	aboutSection.addEventListener("pointerleave", () => {
+		if (!isReady) {
+			return;
+		}
+
+		resetInteractivity();
+	});
+}
+
+// Animate the About section once when it is at least 25% visible.
+function initAboutSectionAnimation() {
+	const aboutSection = document.querySelector(".about-65tech");
+	const aboutTitle = document.querySelector(".about-65tech__heading .section-h2");
+	const aboutSubtitle = document.querySelector(".about-65tech__heading p");
+	const aboutText = document.querySelector(".about-65tech__institutional");
+	const aboutPlaceholder = document.querySelector(".about-65tech__placeholder");
+	const aboutCards = aboutSection ? Array.from(aboutSection.querySelectorAll(".about-65tech__card")) : [];
+
+	if (!aboutSection) {
+		return;
+	}
+
+	let hasPlayed = false;
+
+	const runSequence = async () => {
+		if (hasPlayed) {
+			return;
+		}
+
+		hasPlayed = true;
+		aboutSection.classList.add("about-65tech--in-view");
+
+		revealElement(aboutTitle);
+		await wait(780);
+		revealElement(aboutSubtitle);
+		await wait(620);
+		revealElement(aboutText);
+		await wait(620);
+		revealElement(aboutPlaceholder);
+		await wait(780);
+		await revealCardsSequentially(aboutCards);
+		initAboutSectionInteractions();
+	};
+
+	if (!("IntersectionObserver" in window)) {
+		runSequence();
+		return;
+	}
+
+	const observer = new IntersectionObserver(
+		(entries, activeObserver) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting || entry.intersectionRatio < 0.3) {
+					return;
+				}
+
+				runSequence();
+				activeObserver.unobserve(entry.target);
+			});
+		},
+		{
+			threshold: [0.3]
+		}
+	);
+
+	observer.observe(aboutSection);
+}
+
+initAboutSectionAnimation();
