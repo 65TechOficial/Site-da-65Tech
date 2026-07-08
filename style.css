@@ -2173,28 +2173,22 @@ text-transform: uppercase;
     grid-template-columns: minmax(280px, 1fr) minmax(340px, 1.25fr);
     gap: clamp(24px, 3.2vw, 40px);
     align-items: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .about-65tech__placeholder {
-    border-radius: 24px;
-    border: 1px dashed rgba(159, 178, 253, 0.42);
     background: #000;
-    min-height: clamp(290px, 34vw, 420px);
+    height: 500px;
     display: grid;
     place-items: center;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 34px rgba(0, 0, 0, 0.34);
-    backdrop-filter: blur(6px);
+    margin: 0 auto;
+       
 }
 
-.about-65tech__placeholder span {
-    color: rgba(207, 216, 254, 0.86);
-    text-align: center;
-    padding: 0 18px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-size: clamp(0.82rem, 1.1vw, 0.94rem);
-    font-family: Inter, Poppins, system-ui, sans-serif;
-}
+
+
 
 .about-65tech__info {
     display: grid;
@@ -2219,16 +2213,17 @@ text-transform: uppercase;
 .about-65tech__card {
     border-radius: 18px;
     padding: 18px 16px;
-    border: 1px solid rgba(134, 239, 172, 0.42);
+    border: 1px solid var(--accent-blue-700);
     background: #000;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(7px);
     transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
+
 .about-65tech__card:hover {
     transform: scale(1.03);
-    border-color: rgba(134, 239, 172, 0.78);
+    border-color: rgba(221, 232, 240, 0.892);
     box-shadow: 0 20px 34px rgba(0, 0, 0, 0.36), 0 0 20px rgba(134, 239, 172, 0.16);
 }
 
@@ -2318,7 +2313,7 @@ text-transform: uppercase;
 .about-65tech__placeholder.is-visible {
     opacity: 1;
     transform: translateX(0) scale(var(--panel-scale, 1)) rotateX(var(--panel-rotate-x, 0deg)) rotateY(var(--panel-rotate-y, 0deg)) translate3d(var(--panel-shift-x, 0px), var(--panel-shift-y, 0px), 0);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 34px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(34, 197, 94, 0.06), 0 0 24px rgba(34, 197, 94, 0.08);
+   
     transition-duration: 980ms;
 }
 
@@ -2333,9 +2328,7 @@ text-transform: uppercase;
     transition-property: opacity, transform, box-shadow, border-color, filter;
 }
 
-.about-65tech--interactive .about-65tech__placeholder {
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 18px 34px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(34, 197, 94, 0.08), 0 0 28px rgba(34, 197, 94, 0.08);
-}
+
 
 .about-65tech--interactive .about-65tech__placeholder::before,
 .about-65tech--interactive .about-65tech__placeholder::after {
@@ -2347,24 +2340,13 @@ text-transform: uppercase;
 }
 
 .about-65tech--interactive .about-65tech__placeholder::before {
-    background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.14), transparent 58%);
+   
     filter: blur(10px);
     opacity: 0.55;
     animation: aboutAmbientBreath 7.5s ease-in-out infinite alternate;
 }
 
-.about-65tech--interactive .about-65tech__placeholder::after {
-    inset: 0;
-    background: radial-gradient(
-        circle at var(--panel-glow-x, 50%) var(--panel-glow-y, 50%),
-        rgba(34, 197, 94, 0.18) 0%,
-        rgba(34, 197, 94, 0.08) 18%,
-        rgba(34, 197, 94, 0.03) 35%,
-        transparent 66%
-    );
-    opacity: var(--panel-glow-opacity, 0);
-    transition: opacity 260ms ease;
-}
+
 
 .about-65tech--interactive .about-65tech__placeholder.is-hovered {
     --panel-scale: 1.02;
@@ -2374,7 +2356,6 @@ text-transform: uppercase;
 .about-65tech__card.is-hovered {
     --card-shift-y: -8px;
     --card-scale: 1.02;
-    border-color: rgba(134, 239, 172, 0.84);
     box-shadow: 0 20px 34px rgba(0, 0, 0, 0.42), 0 0 28px rgba(34, 197, 94, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
