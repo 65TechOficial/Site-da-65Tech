@@ -1232,10 +1232,7 @@ text-transform: uppercase;
     font-weight: 700;
 }
 
-.package-card li.package-item-negative::before {
-    content: "✕";
-    color: #ff5a6f;
-}
+
 
 .package-cta {
     margin-top: auto;
