@@ -2394,21 +2394,97 @@ text-transform: uppercase;
     }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 768px) {
+    .about-65tech {
+        padding: 62px 24px 74px;
+        overflow-x: clip;
+    }
+
+    .about-65tech__container {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .about-65tech__content {
+        display: grid;
         grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 20px;
+        width: 100%;
+        min-width: 0;
     }
 
     .about-65tech__placeholder {
-        min-height: clamp(250px, 40vw, 330px);
+        order: 1;
+        width: min(280px, 100%);
+        max-width: 100%;
+        min-height: 0;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .about-65tech__placeholder img {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .about-65tech__info {
+        order: 2;
+        width: 100%;
+        max-width: 640px;
+        min-width: 0;
+        gap: 18px;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .about-65tech__heading {
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    .about-65tech__heading .section-h2 {
+        text-align: center;
+        margin: 0 0 8px;
+    }
+
+    .about-65tech__heading p,
+    .about-65tech__institutional {
+        max-width: 38ch;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-size: clamp(1rem, 2.8vw, 1.08rem);
+        line-height: 1.7;
+    }
+
+    .about-65tech__cards {
+        width: 100%;
+        max-width: 560px;
+        min-width: 0;
+        grid-template-columns: 1fr;
+    }
+
+    .about-65tech__card {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about-65tech__icon {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-65tech__card p {
+        line-height: 1.7;
+        text-align: center;
     }
 }
 
 @media (max-width: 640px) {
-    .about-65tech {
-        padding: 62px 14px 74px;
-    }
-
     .about-65tech__cards {
         grid-template-columns: 1fr;
     }
